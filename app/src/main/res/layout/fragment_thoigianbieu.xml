@@ -1,0 +1,65 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:orientation="vertical" android:layout_width="match_parent"
+    android:layout_height="match_parent">
+    <LinearLayout
+        android:orientation="horizontal"
+        android:layout_width="match_parent"
+        android:layout_height="50dp">
+
+        <TextView
+            android:id="@+id/tv_tkb_previous"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:textSize="25dp"
+            android:textColor="#ffe95451"
+            android:layout_weight="1"
+            android:gravity="end"
+            android:layout_gravity="center"
+
+            />
+
+        <TextView
+            android:id="@+id/tv_tkb_month"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="MONTH"
+            android:gravity="center"
+            android:textSize="20dp"
+            android:textColor="#ffe95451"
+            android:layout_weight="1"
+            android:layout_gravity="center"/>
+        <TextView
+            android:id="@+id/tv_tkb_next"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center"
+            android:textSize="25dp"
+            android:textColor="#ffe95451"
+            android:layout_weight="1"
+            android:gravity="start" />
+    </LinearLayout>
+    <LinearLayout
+        android:orientation="vertical"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
+        <com.github.sundeepk.compactcalendarview.CompactCalendarView
+            xmlns:app="http://schemas.android.com/apk/res-auto"
+            android:id="@+id/compactcalendar_view"
+            android:layout_width="fill_parent"
+            android:paddingRight="10dp"
+            android:paddingLeft="10dp"
+            android:layout_height="match_parent"
+            app:compactCalendarTargetHeight="250dp"
+            app:compactCalendarTextSize="12sp"
+            app:compactCalendarBackgroundColor="#fff"
+            app:compactCalendarTextColor="#000000"
+            app:compactCalendarCurrentSelectedDayBackgroundColor="#E57373"
+            app:compactCalendarCurrentDayBackgroundColor="#f7dfdf"
+            app:compactCalendarMultiEventIndicatorColor="#fff"
+            />
+
+    </LinearLayout>
+
+
+</LinearLayout>
