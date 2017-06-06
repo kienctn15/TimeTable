@@ -56,7 +56,6 @@ public class LoginActivity extends AppCompatActivity {
         });
     }
 
-
     private void userLogin() {
         String u = edt_login_username.getText().toString().trim();
         String p = edt_login_password.getText().toString().trim();

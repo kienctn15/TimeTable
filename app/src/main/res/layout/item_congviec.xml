@@ -76,13 +76,13 @@
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:textSize="20sp"
-                    android:text="1234567 ngày trôi"
+                    android:text="item_congviec_Title"
                     android:id="@+id/item_congviec_Title"/>
                 <TextView
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:textSize="16sp"
-                    android:text="1234567 ngày trôi"
+                    android:text="item_congviec_Address"
                     android:ellipsize="end"
                     android:maxLines="3"
                     android:id="@+id/item_congviec_Address" />
@@ -90,7 +90,7 @@
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:textSize="16sp"
-                    android:text="1234567 ngày trôi"
+                    android:text="item_congviec_Description"
                     android:ellipsize="end"
                     android:maxLines="3"
                     android:id="@+id/item_congviec_Description" />
