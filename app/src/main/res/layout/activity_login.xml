@@ -1,0 +1,57 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+xmlns:app="http://schemas.android.com/apk/res-auto"
+xmlns:tools="http://schemas.android.com/tools"
+android:layout_width="match_parent"
+android:layout_height="match_parent"
+android:orientation="vertical"
+tools:context="com.example.falcon.timetable.Login_Register.LoginActivity">
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:paddingTop="5dp"
+        android:text="Tên đăng nhập"
+        android:textColor="@color/colorPrimaryDark" />
+
+    <EditText
+        android:id="@+id/edt_login_username"
+        android:layout_width="match_parent"
+        android:layout_height="40dp"
+        android:inputType="text"
+        android:textSize="15sp" />
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:paddingTop="5dp"
+        android:text="Mật khẩu"
+        android:textColor="@color/colorPrimaryDark" />
+
+    <EditText
+        android:id="@+id/edt_login_password"
+        android:layout_width="match_parent"
+        android:layout_height="40dp"
+        android:inputType="textPassword"
+        android:textSize="15sp" />
+
+    <Button
+        android:id="@+id/btn_login"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_gravity="center_horizontal"
+        android:text="Đăng nhập" />
+    <TextView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="Hoặc"
+        android:gravity="center"
+        android:padding="10dp"
+        android:textSize="20sp"/>
+    <TextView
+        android:id="@+id/tv_login_register"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="Đăng kí tài khoản ở đây"
+        android:padding="10dp"
+        android:gravity="center"/>
+</LinearLayout>
