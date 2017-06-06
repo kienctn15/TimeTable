@@ -82,28 +82,30 @@
                     android:id="@+id/rbg_rd_llhangngay"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:text="Tất cả các ngày"
+                    android:text="Tất cả các ngày (30 ngày)"
                     android:textSize="15sp" />
 
                 <RadioButton
                     android:id="@+id/rbg_rd_lltheotuan"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:text="Lặp lại theo tuần"
+                    android:text="Lặp lại theo tuần (24 tuần)"
                     android:textSize="15sp" />
 
                 <RadioButton
                     android:id="@+id/rbg_rd_lltheothang"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:text="Lặp lại theo tháng"
+                    android:text="Lặp lại theo tháng (6 tháng)"
                     android:textSize="15sp" />
             </RadioGroup>
 
             <FrameLayout
                 android:id="@+id/content_frame_themcongviec"
                 android:layout_width="match_parent"
-                android:layout_height="match_parent"></FrameLayout>
+                android:layout_height="match_parent">
+                
+            </FrameLayout>
 
             <Button
                 android:layout_width="wrap_content"
