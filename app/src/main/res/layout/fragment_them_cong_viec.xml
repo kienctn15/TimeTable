@@ -112,6 +112,7 @@
                 android:layout_margin="10dp"
                 android:background="@drawable/cardbackground"
                 android:text="Lưu"
+                android:id="@+id/btn_themcongviec_luu"
                 android:textColor="#FFFFFf"
                 android:textStyle="bold" />
         </LinearLayout>

@@ -23,7 +23,7 @@
                 android:textStyle="bold" />
 
             <EditText
-                android:id="@+id/edt_themcongviec_ten"
+                android:id="@+id/edt_suacongviec_ten"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:ellipsize="end"
@@ -37,7 +37,7 @@
                 android:textStyle="bold" />
 
             <EditText
-                android:id="@+id/edt_themcongviec_diadiem"
+                android:id="@+id/edt_suacongviec_diadiem"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:ellipsize="end"
@@ -51,7 +51,7 @@
                 android:textStyle="bold" />
 
             <EditText
-                android:id="@+id/edt_themcongviec_mota"
+                android:id="@+id/edt_suacongviec_mota"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:ellipsize="end"
@@ -63,7 +63,24 @@
                 android:text="Thời gian"
                 android:textSize="18sp"
                 android:textStyle="bold" />
-
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:gravity="center"
+                android:text="10h10"
+                android:id="@+id/tv_suacongviec_thoigian"
+                android:textSize="24sp"
+                android:textStyle="bold" />
+            <Button
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center"
+                android:layout_margin="10dp"
+                android:background="@drawable/cardbackground"
+                android:text="Lưu"
+                android:id="@+id/btn_suacongviec_luu"
+                android:textColor="#FFFFFf"
+                android:textStyle="bold" />
         </LinearLayout>
     </ScrollView>
 </LinearLayout>
