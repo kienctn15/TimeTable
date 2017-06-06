@@ -1,15 +1,119 @@
-<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context="com.example.falcon.timetable.ThemCongViecFragment">
+    android:orientation="vertical"
+    android:padding="10dp"
+    tools:context="com.example.falcon.timetable.DanhSachCongViec.ThemCongViecFragment">
 
-    <!-- TODO: Update blank fragment layout -->
-
-    <FrameLayout
-        android:id="@+id/content_frame_themcongviec"
+    <ScrollView
         android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        ></FrameLayout>
+        android:layout_height="wrap_content">
 
-</FrameLayout>
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:orientation="vertical">
+
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="Tên công việc"
+                android:textSize="18sp"
+                android:textStyle="bold" />
+
+            <EditText
+                android:id="@+id/edt_themcongviec_ten"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:ellipsize="end"
+                android:maxLines="2" />
+
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="Địa điểm"
+                android:textSize="18sp"
+                android:textStyle="bold" />
+
+            <EditText
+                android:id="@+id/edt_themcongviec_diadiem"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:ellipsize="end"
+                android:maxLines="2" />
+
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="Mô tả"
+                android:textSize="18sp"
+                android:textStyle="bold" />
+
+            <EditText
+                android:id="@+id/edt_themcongviec_mota"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:ellipsize="end"
+                android:maxLines="2" />
+
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="Lịch trình"
+                android:textSize="18sp"
+                android:textStyle="bold" />
+
+            <RadioGroup
+                android:id="@+id/rbg_themcongviec"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:checkedButton="@id/rbg_rd_khongll"
+                android:paddingTop="5dp">
+
+                <RadioButton
+                    android:id="@+id/rbg_rd_khongll"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:text="Không lặp lại"
+                    android:textSize="15sp" />
+
+                <RadioButton
+                    android:id="@+id/rbg_rd_llhangngay"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:text="Tất cả các ngày"
+                    android:textSize="15sp" />
+
+                <RadioButton
+                    android:id="@+id/rbg_rd_lltheotuan"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:text="Lặp lại theo tuần"
+                    android:textSize="15sp" />
+
+                <RadioButton
+                    android:id="@+id/rbg_rd_lltheothang"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:text="Lặp lại theo tháng"
+                    android:textSize="15sp" />
+            </RadioGroup>
+
+            <FrameLayout
+                android:id="@+id/content_frame_themcongviec"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"></FrameLayout>
+
+            <Button
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center"
+                android:layout_margin="10dp"
+                android:background="@drawable/cardbackground"
+                android:text="Lưu"
+                android:textColor="#FFFFFf"
+                android:textStyle="bold" />
+        </LinearLayout>
+    </ScrollView>
+</LinearLayout>

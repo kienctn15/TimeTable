@@ -35,7 +35,7 @@
                     android:layout_weight="1"
                     android:text="Time"
                     android:textStyle="bold"
-                    android:textSize="18dp" />
+                    android:textSize="18sp" />
 
                 <LinearLayout
                     android:layout_width="wrap_content"
@@ -55,7 +55,8 @@
                         android:layout_height="match_parent"
                         android:layout_marginRight="5dp"
                         android:layout_marginTop="10dp"
-                        android:background="@drawable/ic_delete_forever_black_24dp" />
+                        android:background="@drawable/ic_delete_forever_black_24dp"
+                        android:ellipsize="end"/>
                 </LinearLayout>
             </LinearLayout>
 
@@ -74,14 +75,24 @@
                 <TextView
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:textSize="20dp"
+                    android:textSize="20sp"
                     android:text="1234567 ngày trôi"
                     android:id="@+id/item_congviec_Title"/>
                 <TextView
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:textSize="13dp"
+                    android:textSize="16sp"
                     android:text="1234567 ngày trôi"
+                    android:ellipsize="end"
+                    android:maxLines="3"
+                    android:id="@+id/item_congviec_Address" />
+                <TextView
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:textSize="16sp"
+                    android:text="1234567 ngày trôi"
+                    android:ellipsize="end"
+                    android:maxLines="3"
                     android:id="@+id/item_congviec_Description" />
             </LinearLayout>
         </LinearLayout>
