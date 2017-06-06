@@ -32,7 +32,7 @@ public class LoginActivity extends AppCompatActivity {
 
 
 
-        db = new DBHandler(this);
+        db = new DBHandler(getApplicationContext());
         progressDialog = new ProgressDialog(this);
         progressDialog.setCancelable(false);
 

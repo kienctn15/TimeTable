@@ -16,11 +16,11 @@ import com.example.falcon.timetable.Login_Register.User;
 
 public class DBHandler extends SQLiteOpenHelper {
 
-    private static final String DATABASE_NAME="db_timetable";
+    private static final String DATABASE_NAME="db_timetable_vnpt";
     private static final int DATABASE_VERSION=1;
 
     // Bảng USER
-    public static final String TABLE_NAME_USER="tbl_calendar";
+    public static final String TABLE_NAME_USER="tbl_user";
     public static final String KEY_ID="id";
     public static final String KEY_USERNAME = "username";
     public static final String KEY_PASSWORD="password";
@@ -91,19 +91,28 @@ public class DBHandler extends SQLiteOpenHelper {
 
     public boolean check_login(String username, String password){
         open();
-        String sql="SELECT * FROM "+TABLE_NAME_USER + "WHERE " + KEY_USERNAME + " = " + username + " AND " + KEY_PASSWORD + " = " + password;
-        Cursor cursor = db.rawQuery(sql,null);
+        String selection = KEY_USERNAME + " = ?" + " AND " + KEY_PASSWORD + " = ?";
+        Cursor cursor = db.query(TABLE_NAME_USER,null,selection,new String[]{username,password},null,null,null);
         if(cursor.getCount()>0)
             return true;
         return false;
+
+    }
+
+    public boolean check_register(String username){
+        open();
+        Cursor cursor = db.query(TABLE_NAME_USER,null,KEY_USERNAME + " =? ",new String[]{username},null,null,null);
+        if(cursor.getCount()>0)
+            return false;
+        return true;
     }
 
     public void delete_table_user(){
         open();
         if(db.delete(TABLE_NAME_USER,null,null)!=-1){
-             Toast.makeText(context,"Xoa Thành Công " + TABLE_NAME_USER,Toast.LENGTH_SHORT).show();
+             Toast.makeText(context,"Xóa Thành Công " + TABLE_NAME_USER,Toast.LENGTH_SHORT).show();
         }else{
-              Toast.makeText(context,"Xoa Thất Bại " + TABLE_NAME_USER,Toast.LENGTH_SHORT).show();
+              Toast.makeText(context,"Xóa Thất Bại " + TABLE_NAME_USER,Toast.LENGTH_SHORT).show();
         }
         close();
     }
