@@ -11,15 +11,15 @@ public class CongViec {
     private int id;
     private String title;
     private String address;
-    private Date date;
-    private Time time_start;
-    private Time time_end;
+    private String date;
+    private String time_start;
+    private String time_end;
     private String note;
 
     public CongViec() {
     }
 
-    public CongViec(int id, String title, String address, Date date, Time time_start, Time time_end, String note) {
+    public CongViec(int id, String title, String address, String date, String time_start, String time_end, String note) {
         this.id = id;
         this.title = title;
         this.address = address;
@@ -53,27 +53,27 @@ public class CongViec {
         this.address = address;
     }
 
-    public Date getDate() {
+    public String getDate() {
         return date;
     }
 
-    public void setDate(Date date) {
+    public void setDate(String date) {
         this.date = date;
     }
 
-    public Time getTime_start() {
+    public String getTime_start() {
         return time_start;
     }
 
-    public void setTime_start(Time time_start) {
+    public void setTime_start(String time_start) {
         this.time_start = time_start;
     }
 
-    public Time getTime_end() {
+    public String getTime_end() {
         return time_end;
     }
 
-    public void setTime_end(Time time_end) {
+    public void setTime_end(String time_end) {
         this.time_end = time_end;
     }
 

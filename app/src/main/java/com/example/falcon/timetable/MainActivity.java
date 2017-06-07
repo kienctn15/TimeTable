@@ -20,6 +20,7 @@ import android.widget.TextView;
 
 import com.example.falcon.timetable.Login_Register.LoginActivity;
 import com.example.falcon.timetable.Login_Register.UserSessionManager;
+import com.example.falcon.timetable.TatCaCongViec.TatCaCongViecFragment;
 import com.github.sundeepk.compactcalendarview.CompactCalendarView;
 import com.github.sundeepk.compactcalendarview.domain.Event;
 
@@ -128,7 +129,10 @@ public class MainActivity extends AppCompatActivity
         int id = item.getItemId();
 
         if (id == R.id.nav_tatca_cac_congviec) {
-            // Handle the camera action
+            FragmentManager fragmentManager = getSupportFragmentManager();
+            fragmentManager.beginTransaction().replace(R.id.content_frame, new TatCaCongViecFragment())
+                    .addToBackStack(null)
+                    .commit();
         } else if (id == R.id.nav_caidat) {
 
         } else if (id == R.id.nav_dongbo_dulieu) {

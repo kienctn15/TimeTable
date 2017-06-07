@@ -16,6 +16,7 @@ import java.sql.Time;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
+import java.util.List;
 
 /**
  * Created by Admin on 6/6/2017.
@@ -23,7 +24,7 @@ import java.util.ArrayList;
 
 public class DBHandler extends SQLiteOpenHelper {
 
-    private static final String DATABASE_NAME="db_timetable_vnpt";
+    private static final String DATABASE_NAME="db_timetable_vnpt_2";
     private static final int DATABASE_VERSION=1;
 
     public static final String KEY_ID="id";
@@ -60,9 +61,9 @@ public class DBHandler extends SQLiteOpenHelper {
             + KEY_ID + " INTEGER PRIMARY KEY AUTOINCREMENT, "
             + KEY_TITLE + " TEXT , "
             + KEY_ADDRESS + " TEXT , "
-            + KEY_DATE + " DATE , "
-            + KEY_TIME_START + " TIME , "
-            + KEY_TIME_END + " TIME , "
+            + KEY_DATE + " TEXT , "
+            + KEY_TIME_START + " TEXT , "
+            + KEY_TIME_END + " TEXT , "
             + KEY_NOTE + " TEXT )";
     private static final String DROP_TABLE_CONGVIEC="DROP TABLE IF EXISTS "+ TABLE_NAME_CONGVIEC;
 
@@ -164,7 +165,7 @@ public class DBHandler extends SQLiteOpenHelper {
     // TABLE CONG VIEC
     public void insert_table_congviec(CongViec congViec){
         open();
-        SimpleDateFormat dateFormat = new SimpleDateFormat("yyyy-MM-dd");
+        SimpleDateFormat dateFormat = new SimpleDateFormat("dd-MM-yyyy");
         SimpleDateFormat timeFormat = new SimpleDateFormat("HH:mm:ss");
         ContentValues values=new ContentValues();
         values.put(KEY_TITLE,congViec.getTitle());
@@ -184,21 +185,19 @@ public class DBHandler extends SQLiteOpenHelper {
         close();
     }
 
-    public ArrayList<CongViec> get_all_congviec() throws ParseException {
+    public List<CongViec> get_all_congviec() throws ParseException {
         open();
-        ArrayList<CongViec> list = new ArrayList<>();
-        SimpleDateFormat dateFormat = new SimpleDateFormat("yyyy-MM-dd");
-        SimpleDateFormat timeFormat = new SimpleDateFormat("HH:mm:ss");
+        List<CongViec> list = new ArrayList<>();
         Cursor cursor = db.query(TABLE_NAME_CONGVIEC,null,null,null,null,null,null);
         if(cursor!=null){
             cursor.moveToFirst();
-            while (cursor.isAfterLast()){
+            while (!cursor.isAfterLast()){
                 CongViec congViec = new CongViec();
-                congViec.setId(cursor.getInt(cursor.getColumnIndex(KEY_ID)));
+                congViec.setId(Integer.parseInt(cursor.getString(cursor.getColumnIndex(KEY_ID))));
                 congViec.setAddress(cursor.getString(cursor.getColumnIndex(KEY_ADDRESS)));
-                congViec.setDate((Date) dateFormat.parse(cursor.getString(cursor.getColumnIndex(KEY_DATE))));
-                congViec.setTime_start((Time) timeFormat.parse(cursor.getString(cursor.getColumnIndex(KEY_TIME_START))));
-                congViec.setTime_end((Time) timeFormat.parse(cursor.getString(cursor.getColumnIndex(KEY_TIME_END))));
+                congViec.setDate(cursor.getString(cursor.getColumnIndex(KEY_DATE)));
+                congViec.setTime_start(cursor.getString(cursor.getColumnIndex(KEY_TIME_START)));
+                congViec.setTime_end(cursor.getString(cursor.getColumnIndex(KEY_TIME_END)));
                 congViec.setNote(cursor.getString(cursor.getColumnIndex(KEY_NOTE)));
 
                 list.add(congViec);
