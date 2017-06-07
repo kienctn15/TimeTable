@@ -185,6 +185,32 @@ public class DBHandler extends SQLiteOpenHelper {
         close();
     }
 
+    public void update_congviec(CongViec congViec){
+        open();
+        ContentValues values=new ContentValues();
+        values.put(KEY_TITLE,congViec.getTitle());
+        values.put(KEY_ADDRESS,congViec.getAddress());
+        values.put(KEY_DATE,congViec.getDate());
+        values.put(KEY_TIME_START,congViec.getTime_start());
+        values.put(KEY_TIME_END,congViec.getTime_end());
+        values.put(KEY_NOTE,congViec.getNote());
+       if( db.update(TABLE_NAME_CONGVIEC,values,KEY_ID +" =? ",new String[]{String.valueOf(congViec.getId())})!=-1){
+           Toast.makeText(context, "Sửa thành công", Toast.LENGTH_SHORT).show();
+       }else{
+           Toast.makeText(context, "Sửa thất bại", Toast.LENGTH_SHORT).show();
+       }
+    }
+
+    public void delete_congviec(int id){
+        open();
+        if(db.delete(TABLE_NAME_CONGVIEC,KEY_ID + " =? ",new String[]{String.valueOf(id)})!=-1){
+            Toast.makeText(context,"Xóa Thành Công " ,Toast.LENGTH_SHORT).show();
+        }else{
+            Toast.makeText(context,"Xóa Thất Bại " ,Toast.LENGTH_SHORT).show();
+        }
+        close();
+    }
+
     public List<CongViec> get_all_congviec() throws ParseException {
         open();
         List<CongViec> list = new ArrayList<>();
