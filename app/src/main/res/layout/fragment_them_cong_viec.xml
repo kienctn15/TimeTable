@@ -68,9 +68,9 @@
                 android:id="@+id/rbg_themcongviec"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:checkedButton="@+id/rbg_rd_khongll"
-                android:paddingTop="5dp">
 
+                android:paddingTop="5dp">
+                <!--android:checkedButton="@+id/rbg_rd_khongll"-->
                 <RadioButton
                     android:id="@+id/rbg_rd_khongll"
                     android:layout_width="match_parent"
@@ -104,17 +104,17 @@
                 android:id="@+id/content_frame_themcongviec"
                 android:layout_width="match_parent"
                 android:layout_height="match_parent">
-                
+
             </FrameLayout>
 
             <Button
+                android:id="@+id/btn_themcongviec_luu"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_gravity="center"
                 android:layout_margin="10dp"
                 android:background="@drawable/cardbackground"
                 android:text="Lưu"
-                android:id="@+id/btn_themcongviec_luu"
                 android:textColor="#FFFFFf"
                 android:textStyle="bold" />
         </LinearLayout>

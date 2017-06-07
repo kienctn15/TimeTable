@@ -2,6 +2,7 @@ package com.example.falcon.timetable;
 
 import android.os.Bundle;
 import android.support.annotation.Nullable;
+import android.support.design.widget.FloatingActionButton;
 import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentManager;
 import android.view.LayoutInflater;
@@ -9,11 +10,12 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.TextView;
 
+import com.example.falcon.timetable.DanhSachCongViec.ThemCongViecFragment;
 import com.github.sundeepk.compactcalendarview.CompactCalendarView;
 import com.github.sundeepk.compactcalendarview.domain.Event;
 
 import java.text.SimpleDateFormat;
-import java.util.ArrayList;
+import java.util.Calendar;
 import java.util.Date;
 import java.util.List;
 import java.util.Locale;
@@ -36,16 +38,34 @@ public class ThoiGianBieu_Fragment extends Fragment {
         initFindViewById();
         initEvent();
         compactCalendar = (CompactCalendarView) myView.findViewById(R.id.compactcalendar_view);
-        compactCalendar.setFirstDayOfWeek(2);
+        compactCalendar.setFirstDayOfWeek(Calendar.MONDAY);
         compactCalendar.setUseThreeLetterAbbreviation(true);
         String abc = dateFormatMonth.format(compactCalendar.getFirstDayOfCurrentMonth()); // hiển thị tháng - năm bao nhiêu
         tv_month.setText(abc);
+
+        FloatingActionButton fab = (FloatingActionButton) myView.findViewById(R.id.fab);
+
+        fab.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                FragmentManager fragmentManager = getFragmentManager();
+                fragmentManager.beginTransaction().replace(R.id.content_frame, new ThemCongViecFragment())
+                        .addToBackStack(null)
+                        .commit();
+            }
+        });
+        /*long epoch = 0;
+        try {
+            epoch = new SimpleDateFormat("dd/MM/yyyy HH:mm:ss").parse("01/01/1970 01:00:00").getTime() / 1000;
+        } catch (ParseException e) {
+            e.printStackTrace();
+        }*/
+        //String date = new java.text.SimpleDateFormat("dd/MM/yyyy HH:mm:ss").format(new java.util.Date(epoch*1000));
 
         compactCalendar.setListener(new CompactCalendarView.CompactCalendarViewListener() {
             @Override
             public void onDayClick(Date dateClicked) {
                 List<Event> events = compactCalendar.getEvents(dateClicked);
-
             }
 
             @Override

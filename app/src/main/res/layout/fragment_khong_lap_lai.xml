@@ -1,9 +1,10 @@
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
-    android:layout_height="match_parent"
+    android:layout_height="wrap_content"
     android:layout_margin="10dp"
     android:orientation="horizontal"
+    android:gravity="center"
     tools:context="com.example.falcon.timetable.DanhSachCongViec.LichTrinh.KhongLapLaiFragment">
 
     <!-- TODO: Update blank fragment layout -->
@@ -11,13 +12,13 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         style="@android:style/Widget.Button"
-        android:text="Chọn ngày"
+        android:text="Ngày"
         android:id="@+id/tv_fragment_kll_chonngay"/>
     <TextView
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         style="@android:style/Widget.Button"
-        android:text="Chọn giờ bắt đầu"
+        android:text="Giờ bắt đầu"
         android:id="@+id/tv_fragment_kll_chongio_batdau"
         />
     <TextView

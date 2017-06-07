@@ -1,110 +1,104 @@
 package com.example.falcon.timetable.DanhSachCongViec;
 
-import android.content.Context;
-import android.net.Uri;
 import android.os.Bundle;
+import android.support.annotation.Nullable;
 import android.support.v4.app.Fragment;
+import android.support.v4.app.FragmentManager;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.EditText;
+import android.widget.RadioButton;
+import android.widget.RadioGroup;
 
+import com.example.falcon.timetable.DanhSachCongViec.LichTrinh.KhongLapLaiFragment;
+import com.example.falcon.timetable.DanhSachCongViec.LichTrinh.LapLaiHangNgayFragment;
+import com.example.falcon.timetable.DanhSachCongViec.LichTrinh.LapLaiTheoThangFragment;
+import com.example.falcon.timetable.DanhSachCongViec.LichTrinh.LapLaiTheoTuanFragment;
 import com.example.falcon.timetable.R;
 
 
-/**
- * A simple {@link Fragment} subclass.
- * Activities that contain this fragment must implement the
- * {@link ThemCongViecFragment.OnFragmentInteractionListener} interface
- * to handle interaction events.
- * Use the {@link ThemCongViecFragment#newInstance} factory method to
- * create an instance of this fragment.
- */
 public class ThemCongViecFragment extends Fragment {
-    // TODO: Rename parameter arguments, choose names that match
-    // the fragment initialization parameters, e.g. ARG_ITEM_NUMBER
-    private static final String ARG_PARAM1 = "param1";
-    private static final String ARG_PARAM2 = "param2";
+    View myView;
+    EditText title, address, description;
+    RadioGroup radioGroup;
+    RadioButton rd_kll, rd_llttuan, rd_lltthang, rd_llhangngay;
 
-    // TODO: Rename and change types of parameters
-    private String mParam1;
-    private String mParam2;
-
-    private OnFragmentInteractionListener mListener;
-
-    public ThemCongViecFragment() {
-        // Required empty public constructor
-    }
-
-    /**
-     * Use this factory method to create a new instance of
-     * this fragment using the provided parameters.
-     *
-     * @param param1 Parameter 1.
-     * @param param2 Parameter 2.
-     * @return A new instance of fragment ThemCongViecFragment.
-     */
-    // TODO: Rename and change types and number of parameters
-    public static ThemCongViecFragment newInstance(String param1, String param2) {
-        ThemCongViecFragment fragment = new ThemCongViecFragment();
-        Bundle args = new Bundle();
-        args.putString(ARG_PARAM1, param1);
-        args.putString(ARG_PARAM2, param2);
-        fragment.setArguments(args);
-        return fragment;
-    }
-
+    @Nullable
     @Override
-    public void onCreate(Bundle savedInstanceState) {
-        super.onCreate(savedInstanceState);
-        if (getArguments() != null) {
-            mParam1 = getArguments().getString(ARG_PARAM1);
-            mParam2 = getArguments().getString(ARG_PARAM2);
+    public View onCreateView(LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
+        myView = inflater.inflate(R.layout.fragment_them_cong_viec, container, false);
+
+        title = (EditText) myView.findViewById(R.id.edt_themcongviec_ten);
+        address = (EditText) myView.findViewById(R.id.edt_themcongviec_diadiem);
+        description = (EditText) myView.findViewById(R.id.edt_themcongviec_mota);
+        radioGroup = (RadioGroup) myView.findViewById(R.id.rbg_themcongviec);
+        rd_kll = (RadioButton) myView.findViewById(R.id.rbg_rd_khongll);
+        rd_llhangngay = (RadioButton) myView.findViewById(R.id.rbg_rd_llhangngay);
+        rd_lltthang = (RadioButton) myView.findViewById(R.id.rbg_rd_lltheothang);
+        rd_llttuan = (RadioButton) myView.findViewById(R.id.rbg_rd_lltheotuan);
+        radioGroup.setOnCheckedChangeListener(new RadioGroup.OnCheckedChangeListener() {
+            @Override
+            public void onCheckedChanged(RadioGroup group, int checkedId) {
+
+                View radioButton = radioGroup.findViewById(checkedId);
+                int index = radioGroup.indexOfChild(radioButton);
+
+                // Add logic here
+                FragmentManager fragmentManager = getFragmentManager();
+                switch (index) {
+                    case 0: // first button
+                        fragmentManager.beginTransaction().replace(R.id.content_frame_themcongviec, new KhongLapLaiFragment())
+                                .addToBackStack(null)
+                                .commit();
+                        break;
+                    case 1: // secondbutton
+                        fragmentManager.beginTransaction().replace(R.id.content_frame_themcongviec, new LapLaiHangNgayFragment())
+                                .addToBackStack(null)
+                                .commit();
+                        break;
+                    case 2: // secondbutton
+                        fragmentManager.beginTransaction().replace(R.id.content_frame_themcongviec, new LapLaiTheoTuanFragment())
+                                .addToBackStack(null)
+                                .commit();
+                        break;
+                    case 3: // secondbutton
+                        fragmentManager.beginTransaction().replace(R.id.content_frame_themcongviec, new LapLaiTheoThangFragment())
+                                .addToBackStack(null)
+                                .commit();
+                        break;
+                }
+            }
+        });
+        /*if (rd_kll.isChecked()) {
+            FragmentManager fragmentManager = getFragmentManager();
+            fragmentManager.beginTransaction().replace(R.id.content_frame_themcongviec, new KhongLapLaiFragment())
+                    .addToBackStack(null)
+                    .commit();
         }
-    }
 
-    @Override
-    public View onCreateView(LayoutInflater inflater, ViewGroup container,
-                             Bundle savedInstanceState) {
-        // Inflate the layout for this fragment
-        return inflater.inflate(R.layout.fragment_them_cong_viec, container, false);
-    }
-
-    // TODO: Rename method, update argument and hook method into UI event
-    public void onButtonPressed(Uri uri) {
-        if (mListener != null) {
-            mListener.onFragmentInteraction(uri);
+        if (rd_llhangngay.isChecked()) {
+            FragmentManager fragmentManager = getFragmentManager();
+            fragmentManager.beginTransaction().replace(R.id.content_frame_themcongviec, new LapLaiHangNgayFragment())
+                    .addToBackStack(null)
+                    .commit();
         }
-    }
 
-    @Override
-    public void onAttach(Context context) {
-        super.onAttach(context);
-        if (context instanceof OnFragmentInteractionListener) {
-            mListener = (OnFragmentInteractionListener) context;
-        } else {
-            throw new RuntimeException(context.toString()
-                    + " must implement OnFragmentInteractionListener");
-        }
-    }
+        if(rd_llttuan.isChecked()){
+                FragmentManager fragmentManager = getFragmentManager();
+                fragmentManager.beginTransaction().replace(R.id.content_frame_themcongviec, new LapLaiTheoTuanFragment())
+                        .addToBackStack(null)
+                        .commit();
 
-    @Override
-    public void onDetach() {
-        super.onDetach();
-        mListener = null;
-    }
+            }
+        if(rd_lltthang.isChecked()){
+            FragmentManager fragmentManager = getFragmentManager();
+            fragmentManager.beginTransaction().replace(R.id.content_frame_themcongviec, new LapLaiTheoThangFragment())
+                    .addToBackStack(null)
+                    .commit();
 
-    /**
-     * This interface must be implemented by activities that contain this
-     * fragment to allow an interaction in this fragment to be communicated
-     * to the activity and potentially other fragments contained in that
-     * activity.
-     * <p>
-     * See the Android Training lesson <a href=
-     * "http://developer.android.com/training/basics/fragments/communicating.html"
-     * >Communicating with Other Fragments</a> for more information.
-     */
-    public interface OnFragmentInteractionListener {
-        // TODO: Update argument type and name
-        void onFragmentInteraction(Uri uri);
+        }*/
+
+        return myView;
     }
 }
