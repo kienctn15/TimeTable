@@ -3,8 +3,6 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     tools:context="com.example.falcon.timetable.DanhSachCongViec.LichTrinh.LapLaiTheoTuanFragment">
-
-    <!-- TODO: Update blank fragment layout -->
     <ScrollView
         android:layout_width="match_parent"
         android:layout_height="wrap_content">
@@ -27,6 +25,4 @@
                 android:id="@+id/btn_llttuan_themngay"/>
         </LinearLayout>
     </ScrollView>
-
-
 </FrameLayout>
