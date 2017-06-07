@@ -52,8 +52,9 @@ public class TatCaCongViecAdapter extends RecyclerView.Adapter<TatCaCongViecAdap
     public void onBindViewHolder(TatCaCongViecAdapter.MyViewHolder holder, int position) {
         CongViec congViec = list_congviec.get(position);
         holder.title.setText(congViec.getTitle());
-        holder.time.setText(congViec.getTime_start().toString());
         holder.address.setText(congViec.getAddress());
+        holder.date.setText(congViec.getDate());
+        holder.time.setText(congViec.getTime_start().toString());
         holder.description.setText(congViec.getNote());
 
 
@@ -67,12 +68,13 @@ public class TatCaCongViecAdapter extends RecyclerView.Adapter<TatCaCongViecAdap
 
 
     public class MyViewHolder extends RecyclerView.ViewHolder implements View.OnClickListener {
-        public TextView time, title, address, description;
+        public TextView date,time, title, address, description;
         public ImageButton edit, delete;
 
 
         public MyViewHolder(View v) {
             super(v);
+            date = (TextView) v.findViewById(R.id.item_tatcacongviec_Date);
             time = (TextView) v.findViewById(R.id.item_tatcacongviec_Time);
             title = (TextView) v.findViewById(R.id.item_tatcacongviec_Title);
             address = (TextView) v.findViewById(R.id.item_tatcacongviec_Address);
