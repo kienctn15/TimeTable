@@ -8,10 +8,12 @@ import android.view.ViewGroup;
 import android.widget.ImageButton;
 import android.widget.TextView;
 
+import com.example.falcon.timetable.DanhSachCongViec.CongViec;
 import com.example.falcon.timetable.DanhSachCongViec.DanhSachCongViecAdapter;
 import com.example.falcon.timetable.DanhSachCongViec.ItemCongViecInfo;
 import com.example.falcon.timetable.R;
 
+import java.util.ArrayList;
 import java.util.List;
 
 /**
@@ -20,11 +22,11 @@ import java.util.List;
 
 public class TatCaCongViecAdapter extends RecyclerView.Adapter<TatCaCongViecAdapter.MyViewHolder> {
 
-    private List<ItemTatCaCongViecInfo> itemTatCaCongViecInfos;
+    private ArrayList<CongViec> congviec;
     private Context context;
 
-    public TatCaCongViecAdapter(List<ItemTatCaCongViecInfo> itemTatCaCongViecInfos) {
-        this.itemTatCaCongViecInfos = itemTatCaCongViecInfos;
+    public TatCaCongViecAdapter(ArrayList<CongViec> congviec) {
+        this.congviec=congviec;
 
     }
 
@@ -38,14 +40,14 @@ public class TatCaCongViecAdapter extends RecyclerView.Adapter<TatCaCongViecAdap
 
     @Override
     public void onBindViewHolder(TatCaCongViecAdapter.MyViewHolder holder, int position) {
-        ItemTatCaCongViecInfo itemTatCaCongViecInfo = itemTatCaCongViecInfos.get(position);
-        holder.time.setText(itemTatCaCongViecInfo.getTime());
+        CongViec congViec = congviec.get(position);
+        holder.time.setText(congViec.getTime_start().toString());
     }
 
 
     @Override
     public int getItemCount() {
-        return itemTatCaCongViecInfos.size();
+        return congviec.size();
     }
 
     public class MyViewHolder extends RecyclerView.ViewHolder implements View.OnClickListener {
