@@ -27,6 +27,7 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:ellipsize="end"
+                android:maxLength="128"
                 android:maxLines="2" />
 
             <TextView
@@ -41,6 +42,7 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:ellipsize="end"
+                android:maxLength="256"
                 android:maxLines="2" />
 
             <TextView
@@ -55,6 +57,7 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:ellipsize="end"
+                android:maxLength="256"
                 android:maxLines="2" />
 
             <TextView
@@ -135,7 +138,7 @@
                 </LinearLayout>
             </LinearLayout>
 
-            <LinearLayout
+           <!-- <LinearLayout
                 android:id="@+id/layout_hangngay"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
@@ -148,21 +151,21 @@
                     android:gravity="center">
 
                     <TextView
-                        android:id="@+id/tv_laplai_chonngay"
+                        android:id="@+id/tv_ll_chonngay"
                         style="@android:style/Widget.Button"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:text="Ngày bắt đầu" />
 
                     <TextView
-                        android:id="@+id/tv_laplai_chongio_batdau"
+                        android:id="@+id/tv_ll_chongio_batdau"
                         style="@android:style/Widget.Button"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:text="Giờ bắt đầu" />
 
                     <TextView
-                        android:id="@+id/tv_laplai_chongio_dukienkt"
+                        android:id="@+id/tv_ll_chongio_dukienkt"
                         style="@android:style/Widget.Button"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
@@ -194,7 +197,7 @@
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
                             android:text="Ngày" />
-                        <!--style="@android:style/Widget.Button"-->
+                        &lt;!&ndash;style="@android:style/Widget.Button"&ndash;&gt;
                         <TextView
                             android:id="@+id/tv_lltt_chongio_batdau"
                             style="@android:style/Widget.Button"
@@ -209,11 +212,11 @@
                             android:layout_height="wrap_content"
                             android:text="Dự kiến kết thúc" />
                     </LinearLayout>
-                    <!--<Button
+                    &lt;!&ndash;<Button
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:text="Thêm ngày"
-                        android:id="@+id/tv_fragment_lltt_them_ngay"/>-->
+                        android:id="@+id/tv_fragment_lltt_them_ngay"/>&ndash;&gt;
                 </LinearLayout>
             </LinearLayout>
 
@@ -255,14 +258,14 @@
                             android:layout_height="wrap_content"
                             android:text="Dự kiến kết thúc" />
                     </LinearLayout>
-                    <!--<Button
+                    &lt;!&ndash;<Button
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:text="Thêm Ngày"
                         android:id="@+id/btn_lltth_themngay"
-                        />-->
+                        />&ndash;&gt;
                 </LinearLayout>
-            </LinearLayout>
+            </LinearLayout>-->
 
             <FrameLayout
                 android:id="@+id/content_frame_themcongviec"
