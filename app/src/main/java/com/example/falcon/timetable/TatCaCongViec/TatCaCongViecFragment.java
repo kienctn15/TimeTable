@@ -69,10 +69,6 @@ public class TatCaCongViecFragment extends Fragment {
 
     public void get_all_congviec()  {
         list_congviec = new ArrayList<>();
-        try {
             list_congviec=db.get_all_congviec();
-        } catch (ParseException e) {
-            e.printStackTrace();
-        }
     }
 }

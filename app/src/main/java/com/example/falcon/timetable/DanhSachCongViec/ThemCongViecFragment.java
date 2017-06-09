@@ -19,15 +19,19 @@ import android.widget.TextView;
 import android.widget.TimePicker;
 import android.widget.Toast;
 
+import com.example.falcon.timetable.DBHandler.DBHandler;
 import com.example.falcon.timetable.R;
 import com.example.falcon.timetable.ThoiGianBieu_Fragment;
 
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
+import java.util.ArrayList;
 import java.util.Calendar;
+import java.util.List;
 
 
 public class ThemCongViecFragment extends Fragment {
+    DBHandler db;
     View myView;
     int option = 0;
     EditText title, address, description;
@@ -67,6 +71,9 @@ public class ThemCongViecFragment extends Fragment {
         layouttth.setVisibility(View.INVISIBLE);
         layouttt.setVisibility(View.INVISIBLE);
         layouthn.setVisibility(View.INVISIBLE);*/
+
+        db = new DBHandler(getActivity());
+
         radioGroup.setOnCheckedChangeListener(new RadioGroup.OnCheckedChangeListener() {
             @Override
             public void onCheckedChanged(RadioGroup group, int checkedId) {
@@ -206,6 +213,20 @@ public class ThemCongViecFragment extends Fragment {
                                                     + kll_gio_bd.getText().toString() + "\n"
                                                     + kll_gio_kt.getText().toString() + "\n"
                                                     + "Không lặp lại!", Toast.LENGTH_SHORT).show();
+
+                                            CongViec congViec = new CongViec();
+                                            congViec.setTitle(title.getText().toString());
+                                            congViec.setAddress(address.getText().toString());
+                                            congViec.setDate(kll_ngay.getText().toString());
+                                            congViec.setTime_start(kll_gio_bd.getText().toString());
+                                            congViec.setTime_end(kll_gio_kt.getText().toString());
+                                            congViec.setNote(description.getText().toString());
+                                            db.insert_table_congviec(congViec);
+                                            List<CongViec> list = new ArrayList<CongViec>();
+                                            list = db.get_all_congviec();
+                                            System.out.println(list.get(0).getTitle());
+                                            System.out.println(list.get(0).getAddress());
+                                            System.out.println(list.get(0).getDate());
                                             FragmentManager fragmentManager = getFragmentManager();
                                             fragmentManager.beginTransaction().replace(R.id.content_frame, new ThoiGianBieu_Fragment())
                                                     .addToBackStack(null)

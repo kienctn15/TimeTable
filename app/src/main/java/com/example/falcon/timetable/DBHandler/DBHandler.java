@@ -213,7 +213,7 @@ public class DBHandler extends SQLiteOpenHelper {
         close();
     }
 
-    public List<CongViec> get_all_congviec() throws ParseException {
+    public List<CongViec> get_all_congviec() {
         open();
         List<CongViec> list = new ArrayList<>();
         Cursor cursor = db.query(TABLE_NAME_CONGVIEC,null,null,null,null,null,null);
