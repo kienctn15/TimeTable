@@ -24,6 +24,9 @@ import java.util.List;
 
 public class DBHandler extends SQLiteOpenHelper {
 
+    // insert sql date : dd/MM/yyyy
+    // time : HH:mm:ss
+
     private static final String DATABASE_NAME="db_timetable_vnpt_2";
     private static final int DATABASE_VERSION=1;
 
@@ -165,14 +168,13 @@ public class DBHandler extends SQLiteOpenHelper {
     // TABLE CONG VIEC
     public void insert_table_congviec(CongViec congViec){
         open();
-        SimpleDateFormat dateFormat = new SimpleDateFormat("dd-MM-yyyy");
-        SimpleDateFormat timeFormat = new SimpleDateFormat("HH:mm:ss");
+
         ContentValues values=new ContentValues();
         values.put(KEY_TITLE,congViec.getTitle());
         values.put(KEY_ADDRESS,congViec.getAddress());
-        values.put(KEY_DATE,dateFormat.format(congViec.getDate()));
-        values.put(KEY_TIME_START,timeFormat.format(congViec.getTime_start()));
-        values.put(KEY_TIME_END,timeFormat.format(congViec.getTime_end()));
+        values.put(KEY_DATE,congViec.getDate());
+        values.put(KEY_TIME_START,congViec.getTime_start());
+        values.put(KEY_TIME_END,congViec.getTime_end());
         values.put(KEY_NOTE,congViec.getNote());
 
         if(db.insert(TABLE_NAME_CONGVIEC,null,values)!=-1){

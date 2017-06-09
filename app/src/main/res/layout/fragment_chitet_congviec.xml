@@ -4,9 +4,26 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:orientation="vertical"
     android:layout_margin="10dp"
+    android:orientation="vertical"
     tools:context="com.example.falcon.timetable.Login_Register.LoginActivity">
+
+    <TextView
+        android:id="@+id/tv_chitiet_congviec_edit"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_gravity="end"
+        android:text="Chỉnh sửa"
+        android:textColor="@color/colorPrimaryDark"/>
+
+    <TextView
+        android:id="@+id/tv_chitiet_congviec_save"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_gravity="end"
+        android:text="Lưu"
+        android:visibility="gone" />
+
     <TextView
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
@@ -20,6 +37,13 @@
         android:layout_height="40dp"
         android:textSize="15sp" />
 
+    <EditText
+        android:id="@+id/edt_chitiet_congviec_title"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:textSize="15sp"
+        android:visibility="gone" />
+
     <TextView
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
@@ -32,6 +56,13 @@
         android:layout_width="match_parent"
         android:layout_height="40dp"
         android:textSize="15sp" />
+    <EditText
+        android:id="@+id/edt_chitiet_congviec_address"
+        android:layout_width="match_parent"
+        android:layout_height="40dp"
+        android:textSize="15sp"
+        android:visibility="gone"/>
+
     <TextView
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
@@ -44,6 +75,15 @@
         android:layout_width="match_parent"
         android:layout_height="40dp"
         android:textSize="15sp" />
+    <ImageButton
+        android:id="@+id/img_chitiet_congviec_date"
+        android:layout_width="wrap_content"
+        android:layout_height="40dp"
+        android:layout_marginRight="5dp"
+        android:layout_marginTop="10dp"
+        android:background="@drawable/ic_edit_black_24dp"
+        android:ellipsize="end"
+        android:visibility="gone"/>
 
     <TextView
         android:layout_width="wrap_content"
@@ -52,11 +92,44 @@
         android:text="Thời Gian"
         android:textColor="@color/colorPrimaryDark" />
 
-    <TextView
-        android:id="@+id/tv_chitiet_congviec_time"
+    <LinearLayout
         android:layout_width="match_parent"
-        android:layout_height="40dp"
-        android:textSize="15sp" />
+        android:layout_height="wrap_content"
+        android:orientation="horizontal">
+
+        <TextView
+            android:id="@+id/tv_chitiet_congviec_time_start"
+            android:layout_width="wrap_content"
+            android:layout_height="40dp"
+            android:textSize="15sp" />
+        <ImageButton
+            android:id="@+id/img_chitiet_congviec_time_start"
+            android:layout_width="wrap_content"
+            android:layout_height="40dp"
+            android:layout_marginRight="5dp"
+            android:layout_marginTop="10dp"
+            android:background="@drawable/ic_edit_black_24dp"
+            android:ellipsize="end"
+            android:visibility="gone"/>
+
+        <TextView
+            android:id="@+id/tv_chitiet_congviec_time_end"
+            android:layout_width="wrap_content"
+            android:layout_height="40dp"
+            android:textSize="15sp" />
+
+        <ImageButton
+            android:id="@+id/img_chitiet_congviec_time_end"
+            android:layout_width="wrap_content"
+            android:layout_height="40dp"
+            android:layout_marginRight="5dp"
+            android:layout_marginTop="10dp"
+            android:background="@drawable/ic_edit_black_24dp"
+            android:ellipsize="end"
+            android:visibility="gone"/>
+
+    </LinearLayout>
+
     <TextView
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
@@ -68,7 +141,13 @@
         android:id="@+id/tv_chitiet_congviec_note"
         android:layout_width="match_parent"
         android:layout_height="40dp"
-        android:textSize="15sp" />
-
+        android:textSize="15sp"
+        />
+    <EditText
+        android:id="@+id/edt_chitiet_congviec_note"
+        android:layout_width="match_parent"
+        android:layout_height="40dp"
+        android:textSize="15sp"
+        android:visibility="gone"/>
 
 </LinearLayout>

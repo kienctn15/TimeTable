@@ -52,13 +52,6 @@
                     android:orientation="horizontal">
 
                     <ImageButton
-                        android:id="@+id/item_tatcacongviec_Edit"
-                        android:layout_width="wrap_content"
-                        android:layout_height="match_parent"
-                        android:layout_marginTop="10dp"
-                        android:background="@drawable/ic_edit_black_24dp" />
-
-                    <ImageButton
                         android:id="@+id/item_tatcacongviec_Delete"
                         android:layout_width="wrap_content"
                         android:layout_height="match_parent"

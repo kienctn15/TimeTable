@@ -57,7 +57,6 @@ public class TatCaCongViecAdapter extends RecyclerView.Adapter<TatCaCongViecAdap
         holder.time.setText(congViec.getTime_start().toString());
         holder.description.setText(congViec.getNote());
 
-
     }
 
 
@@ -68,8 +67,8 @@ public class TatCaCongViecAdapter extends RecyclerView.Adapter<TatCaCongViecAdap
 
 
     public class MyViewHolder extends RecyclerView.ViewHolder implements View.OnClickListener {
-        public TextView date,time, title, address, description;
-        public ImageButton edit, delete;
+        public TextView date, time, title, address, description;
+        public ImageButton delete;
 
 
         public MyViewHolder(View v) {
@@ -79,83 +78,63 @@ public class TatCaCongViecAdapter extends RecyclerView.Adapter<TatCaCongViecAdap
             title = (TextView) v.findViewById(R.id.item_tatcacongviec_Title);
             address = (TextView) v.findViewById(R.id.item_tatcacongviec_Address);
             description = (TextView) v.findViewById(R.id.item_tatcacongviec_Description);
-            edit = (ImageButton) v.findViewById(R.id.item_tatcacongviec_Edit);
             delete = (ImageButton) v.findViewById(R.id.item_tatcacongviec_Delete);
 
             v.setOnClickListener(this);
-            edit.setOnClickListener(this);
-           delete.setOnClickListener(this);
+
+//           delete.setOnClickListener(this);
+
+
+            delete.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View v) {
+                    System.out.println("DELETEEEEEEEEEEEE");
+                    AlertDialog.Builder builder1 = new AlertDialog.Builder(context);
+                    builder1.setMessage("Bạn có chắc chắn muốn xóa không ?");
+                    builder1.setCancelable(true);
+
+                    builder1.setPositiveButton(
+                            "Yes",
+                            new DialogInterface.OnClickListener() {
+                                public void onClick(DialogInterface dialog, int id) {
+
+                                    DBHandler db = new DBHandler(context);
+                                    db.delete_congviec(list_congviec.get(getPosition()).getId());
+                                }
+                            });
+
+                    builder1.setNegativeButton(
+                            "No",
+                            new DialogInterface.OnClickListener() {
+                                public void onClick(DialogInterface dialog, int id) {
+                                    dialog.cancel();
+                                }
+                            });
+
+                    AlertDialog alert11 = builder1.create();
+                    alert11.show();
+                }
+            });
         }
 
         @Override
         public void onClick(View v) {
 
-            //button edit
-            if (v.getId() == R.id.item_tatcacongviec_Edit) {
-                System.out.println("1");
-//               AppCompatActivity activity = (AppCompatActivity) context.getApplicationContext();
-//                SuaCongViecFragment suaCongViecFragment = new SuaCongViecFragment();
-//
-//                Bundle bundle = new Bundle();
-//                bundle.putString("id", String.valueOf(list_congviec.get(getPosition()).getId()));
-//                bundle.putString("title", list_congviec.get(getPosition()).getTitle());
-//                bundle.putString("address", list_congviec.get(getPosition()).getAddress());
-//                bundle.putString("date", list_congviec.get(getPosition()).getDate());
-//                bundle.putString("time_start", list_congviec.get(getPosition()).getTime_start());
-//                bundle.putString("time_end", list_congviec.get(getPosition()).getTime_end());
-//                bundle.putString("description", list_congviec.get(getPosition()).getNote());
-//
-//                suaCongViecFragment.setArguments(bundle);
-//               activity.getSupportFragmentManager().beginTransaction().replace(R.id.content_frame, suaCongViecFragment).addToBackStack(null).commit();
+            AppCompatActivity activity = (AppCompatActivity) v.getContext();
+            ChiTietCongViecFragment myFragment = new ChiTietCongViecFragment();
+            Bundle bundle = new Bundle();
+            bundle.putString("id", String.valueOf(list_congviec.get(getPosition()).getId()));
+            bundle.putString("title", list_congviec.get(getPosition()).getTitle());
+            bundle.putString("address", list_congviec.get(getPosition()).getAddress());
+            bundle.putString("date", list_congviec.get(getPosition()).getDate());
+            bundle.putString("time_start", list_congviec.get(getPosition()).getTime_start());
+            bundle.putString("time_end", list_congviec.get(getPosition()).getTime_end());
+            bundle.putString("description", list_congviec.get(getPosition()).getNote());
 
-            }
+            myFragment.setArguments(bundle);
 
-            // button delete
-            else if (v.getId() == R.id.item_tatcacongviec_Delete) {
-                AlertDialog.Builder builder1 = new AlertDialog.Builder(context);
-                builder1.setMessage("Bạn có chắc chắn muốn xóa không ?");
-                builder1.setCancelable(true);
+            activity.getSupportFragmentManager().beginTransaction().replace(R.id.content_frame, myFragment).addToBackStack(null).commit();
 
-                builder1.setPositiveButton(
-                        "Yes",
-                        new DialogInterface.OnClickListener() {
-                            public void onClick(DialogInterface dialog, int id) {
-
-                                DBHandler db = new DBHandler(context);
-                                db.delete_congviec(list_congviec.get(getPosition()).getId());
-                            }
-                        });
-
-                builder1.setNegativeButton(
-                        "No",
-                        new DialogInterface.OnClickListener() {
-                            public void onClick(DialogInterface dialog, int id) {
-                                dialog.cancel();
-                            }
-                        });
-
-                AlertDialog alert11 = builder1.create();
-                alert11.show();
-
-            } else {
-                // click vào cong viêc mà k phải là btn edit hoặc btn delete
-                System.out.println("3");
-
-                AppCompatActivity activity = (AppCompatActivity) v.getContext();
-                ChiTietCongViecFragment myFragment = new ChiTietCongViecFragment();
-                Bundle bundle = new Bundle();
-                bundle.putString("id", String.valueOf(list_congviec.get(getPosition()).getId()));
-                bundle.putString("title", list_congviec.get(getPosition()).getTitle());
-                bundle.putString("address", list_congviec.get(getPosition()).getAddress());
-                bundle.putString("date", list_congviec.get(getPosition()).getDate());
-                bundle.putString("time_start", list_congviec.get(getPosition()).getTime_start());
-                bundle.putString("time_end", list_congviec.get(getPosition()).getTime_end());
-                bundle.putString("description", list_congviec.get(getPosition()).getNote());
-
-                myFragment.setArguments(bundle);
-
-                activity.getSupportFragmentManager().beginTransaction().replace(R.id.content_frame, myFragment).addToBackStack(null).commit();
-            }
         }
     }
 }
