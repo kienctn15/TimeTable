@@ -25,9 +25,8 @@ import com.example.falcon.timetable.ThoiGianBieu_Fragment;
 
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
-import java.util.ArrayList;
 import java.util.Calendar;
-import java.util.List;
+import java.util.Date;
 
 
 public class ThemCongViecFragment extends Fragment {
@@ -41,6 +40,7 @@ public class ThemCongViecFragment extends Fragment {
     LinearLayout layoutk, layouthn, layouttt, layouttth;
     TextView kll_ngay, kll_gio_bd, kll_gio_kt; /*ll_gio_bd, ll_gio_kt, ll_ngay, lltt_ngay, lltt_gio_bd, lltt_gio_kt, lltth_ngay, lltth_gio_bd, lltth_gio_kt;*/
     private int day, month, year, dayf, monthf, yearf, hour, minute, hourf, minutef;
+    private String strdate, strstart, strend;
 
     @Nullable
     @Override
@@ -113,16 +113,22 @@ public class ThemCongViecFragment extends Fragment {
                                                     monthf = month + 1;
                                                     dayf = dayOfMonth;
                                                     if (monthf > 9) {
-                                                        if (dayf > 9)
+                                                        if (dayf > 9) {
                                                             kll_ngay.setText(dayf + " - " + monthf + " - " + yearf);
-                                                        else
+                                                            strdate = dayf + "/" + monthf + "/" + yearf;
+                                                        } else {
                                                             kll_ngay.setText("0" + dayf + " - " + monthf + " - " + yearf);
-
+                                                            strdate = "0" + dayf + "/" + monthf + "/" + yearf;
+                                                        }
                                                     } else {
-                                                        if (dayf > 9)
+                                                        if (dayf > 9) {
                                                             kll_ngay.setText(dayf + " - " + "0" + monthf + " - " + yearf);
-                                                        else
+                                                            strdate = "0" + dayf + "/0" + monthf + "/" + yearf;
+                                                        } else {
                                                             kll_ngay.setText("0" + dayf + " - " + "0" + monthf + " - " + yearf);
+                                                            strdate = "0" + dayf + "/0" + monthf + "/" + yearf;
+                                                        }
+
                                                     }
                                                 }
                                             }, year, month, day);
@@ -141,15 +147,21 @@ public class ThemCongViecFragment extends Fragment {
                         hourf = hourOfDay;
                         minutef = minute;
                         if (minutef > 9) {
-                            if (hourf > 9)
+                            if (hourf > 9) {
                                 kll_gio_bd.setText(hourf + ":" + minutef);
-                            else
+                                strstart = hourf + ":" + minutef + ":00";
+                            } else {
                                 kll_gio_bd.setText("0" + hourf + ":" + minutef);
+                                strstart = "0" + hourf + ":" + minutef + ":00";
+                            }
                         } else {
-                            if (hourf > 9)
+                            if (hourf > 9) {
                                 kll_gio_bd.setText(hourf + ":0" + minutef);
-                            else
+                                strstart = hourf + ":0" + minutef + ":00";
+                            } else {
                                 kll_gio_bd.setText("0" + hourf + ":0" + minutef);
+                                strstart = "0" + hourf + ":0" + minutef + ":00";
+                            }
                         }
                     }
                 }, hour, minute, true);
@@ -169,14 +181,18 @@ public class ThemCongViecFragment extends Fragment {
                         if (minutef > 9) {
                             if (hourf > 9) {
                                 kll_gio_kt.setText(hourf + ":" + minutef);
+                                strend = hourf + ":" + minutef + ":00";
                             } else {
                                 kll_gio_kt.setText("0" + hourf + ":" + minutef);
+                                strend = "0" + hourf + ":" + minutef + ":00";
                             }
                         } else {
                             if (hourf > 9) {
                                 kll_gio_kt.setText(hourf + ":0" + minutef);
+                                strend = hourf + ":0" + minutef + ":00";
                             } else {
                                 kll_gio_kt.setText("0" + hourf + ":0" + minutef);
+                                strend = "0" + hourf + ":0" + minutef + ":00";
                             }
                         }
                     }
@@ -222,13 +238,15 @@ public class ThemCongViecFragment extends Fragment {
                                             congViec.setTime_end(kll_gio_kt.getText().toString());
                                             congViec.setNote(description.getText().toString());
                                             db.insert_table_congviec(congViec);
-                                            List<CongViec> list = new ArrayList<>();
+                                            /*List<CongViec> list = new ArrayList<>();
                                             list = db.get_all_congviec();
-                                            Toast.makeText(getActivity(), list.size() + "", Toast.LENGTH_SHORT).show();
+                                            Toast.makeText(getActivity(), list.size() + "", Toast.LENGTH_SHORT).show();*/
                                             FragmentManager fragmentManager = getFragmentManager();
                                             fragmentManager.beginTransaction().replace(R.id.content_frame, new ThoiGianBieu_Fragment())
                                                     .addToBackStack(null)
                                                     .commit();
+
+
                                         }
                                     }
                                 }
@@ -255,6 +273,32 @@ public class ThemCongViecFragment extends Fragment {
                                             if (TimeValidator(kll_gio_bd.getText().toString(), kll_gio_kt.getText().toString()) == false) {
                                                 Toast.makeText(getActivity(), "Vui lòng chọn giờ dự kiến kết thúc LỚN HƠN giờ bắt đầu!", Toast.LENGTH_SHORT).show();
                                             } else {
+
+                                                CongViec congViec = new CongViec();
+                                                congViec.setTitle(title.getText().toString());
+                                                congViec.setAddress(address.getText().toString());
+                                                congViec.setDate(kll_ngay.getText().toString());
+                                                congViec.setTime_start(kll_gio_bd.getText().toString());
+                                                congViec.setTime_end(kll_gio_kt.getText().toString());
+                                                congViec.setNote(description.getText().toString());
+
+                                                for (int i = 0; i < 30; i++) {
+                                                    SimpleDateFormat dateParser = new SimpleDateFormat("dd/MM/yyyy");
+                                                    try {
+                                                        Date myDate = dateParser.parse(strdate);
+                                                        Calendar c = Calendar.getInstance();
+                                                        c.setTime(myDate);
+                                                        c.set(Calendar.DAY_OF_YEAR, c.get(Calendar.DAY_OF_YEAR) + i);
+                                                        Date newDate = c.getTime();
+                                                        String newFormattedDate = dateParser.format(newDate);
+                                                        congViec.setDate(newFormattedDate);
+                                                        db.insert_table_congviec(congViec);
+                                                    } catch (ParseException e) {
+                                                        e.printStackTrace();
+                                                        //handle exception
+                                                    }
+                                                }
+                                                Toast.makeText(getActivity(), "Lặp lịch hàng ngày thành công!", Toast.LENGTH_SHORT).show();
                                                 /*Toast.makeText(getActivity(), title.getText().toString() + "\n"
                                                         + address.getText().toString() + "\n"
                                                         + description.getText().toString() + "\n"
@@ -292,6 +336,32 @@ public class ThemCongViecFragment extends Fragment {
                                                 if (TimeValidator(kll_gio_bd.getText().toString(), kll_gio_kt.getText().toString()) == false) {
                                                     Toast.makeText(getActivity(), "Vui lòng chọn giờ dự kiến kết thúc LỚN HƠN giờ bắt đầu!", Toast.LENGTH_SHORT).show();
                                                 } else {
+
+                                                    CongViec congViec = new CongViec();
+                                                    congViec.setTitle(title.getText().toString());
+                                                    congViec.setAddress(address.getText().toString());
+                                                    congViec.setDate(kll_ngay.getText().toString());
+                                                    congViec.setTime_start(kll_gio_bd.getText().toString());
+                                                    congViec.setTime_end(kll_gio_kt.getText().toString());
+                                                    congViec.setNote(description.getText().toString());
+
+                                                    for (int i = 0; i < 24; i++) {
+                                                        SimpleDateFormat dateParser = new SimpleDateFormat("dd/MM/yyyy");
+                                                        try {
+                                                            Date myDate = dateParser.parse(strdate);
+                                                            Calendar c = Calendar.getInstance();
+                                                            c.setTime(myDate);
+                                                            c.set(Calendar.DAY_OF_YEAR, c.get(Calendar.DAY_OF_YEAR) + (i * 7));
+                                                            Date newDate = c.getTime();
+                                                            String newFormattedDate = dateParser.format(newDate);
+                                                            congViec.setDate(newFormattedDate);
+                                                            db.insert_table_congviec(congViec);
+                                                        } catch (ParseException e) {
+                                                            e.printStackTrace();
+                                                            //handle exception
+                                                        }
+                                                    }
+                                                    Toast.makeText(getActivity(), "Lặp lịch hàng tuần thành công!", Toast.LENGTH_SHORT).show();
                                                     /*Toast.makeText(getActivity(), title.getText().toString() + "\n"
                                                             + address.getText().toString() + "\n"
                                                             + description.getText().toString() + "\n"
@@ -329,6 +399,32 @@ public class ThemCongViecFragment extends Fragment {
                                                     if (TimeValidator(kll_gio_bd.getText().toString(), kll_gio_kt.getText().toString()) == false) {
                                                         Toast.makeText(getActivity(), "Vui lòng chọn giờ dự kiến kết thúc LỚN HƠN giờ bắt đầu!", Toast.LENGTH_SHORT).show();
                                                     } else {
+
+                                                        CongViec congViec = new CongViec();
+                                                        congViec.setTitle(title.getText().toString());
+                                                        congViec.setAddress(address.getText().toString());
+                                                        congViec.setDate(kll_ngay.getText().toString());
+                                                        congViec.setTime_start(kll_gio_bd.getText().toString());
+                                                        congViec.setTime_end(kll_gio_kt.getText().toString());
+                                                        congViec.setNote(description.getText().toString());
+
+                                                        for (int i = 0; i < 6; i++) {
+                                                            SimpleDateFormat dateParser = new SimpleDateFormat("dd/MM/yyyy");
+                                                            try {
+                                                                Date myDate = dateParser.parse(strdate);
+                                                                Calendar c = Calendar.getInstance();
+                                                                c.setTime(myDate);
+                                                                c.add(Calendar.MONTH, i);
+                                                                Date newDate = c.getTime();
+                                                                String newFormattedDate = dateParser.format(newDate);
+                                                                congViec.setDate(newFormattedDate);
+                                                                db.insert_table_congviec(congViec);
+                                                            } catch (ParseException e) {
+                                                                e.printStackTrace();
+                                                                //handle exception
+                                                            }
+                                                        }
+                                                        Toast.makeText(getActivity(), "Lặp lịch hàng tháng thành công!", Toast.LENGTH_SHORT).show();
                                                         /*Toast.makeText(getActivity(), title.getText().toString() + "\n"
                                                                 + address.getText().toString() + "\n"
                                                                 + description.getText().toString() + "\n"

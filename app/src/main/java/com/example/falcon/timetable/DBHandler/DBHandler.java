@@ -188,7 +188,7 @@ public class DBHandler extends SQLiteOpenHelper {
         close();
     }
 
-    public void insert_table_congviec_hangngay(CongViec congViec){
+    public void insert_table_congviec_laplai(CongViec congViec){
         open();
         ContentValues values=new ContentValues();
         values.put(KEY_TITLE,congViec.getTitle());
@@ -198,7 +198,6 @@ public class DBHandler extends SQLiteOpenHelper {
         values.put(KEY_TIME_END,congViec.getTime_end());
         values.put(KEY_NOTE,congViec.getNote());
         db.insert(TABLE_NAME_CONGVIEC,null,values);
-
         close();
     }
 
