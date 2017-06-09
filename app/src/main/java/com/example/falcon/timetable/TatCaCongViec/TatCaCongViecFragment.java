@@ -40,22 +40,8 @@ public class TatCaCongViecFragment extends Fragment {
         recyclerView = (RecyclerView) myView.findViewById(R.id.recyclerview_tatcacongviec);
         recyclerView.setHasFixedSize(true);
         db = new DBHandler(getContext());
-        get_all_congviec();
-        CongViec congViec = new CongViec(1,"title","address","1/1/2017","9:00:00","10:00:00","note");
-        CongViec congViec1 = new CongViec(2,"title1","address1","1/1/2017","9:00:00","10:00:00","note1");
-        CongViec congViec2 = new CongViec(3,"title2","address2","1/1/2017","9:00:00","10:00:00","note2");
-        list_congviec.add(congViec);
-        list_congviec.add(congViec1);
-        list_congviec.add(congViec2);
-        db.insert_table_congviec(list_congviec.get(0));
-        db.insert_table_congviec(list_congviec.get(1));
-        db.insert_table_congviec(list_congviec.get(2));
 
-        adapter = new TatCaCongViecAdapter(list_congviec, getActivity());
-        RecyclerView.LayoutManager mLayoutManager = new LinearLayoutManager(getActivity(), LinearLayoutManager.VERTICAL, false);
-        recyclerView.setLayoutManager(mLayoutManager);
-        recyclerView.setItemAnimator(new DefaultItemAnimator());
-        recyclerView.setAdapter(adapter);
+        HienThiTatCaCongViec();
 
         recyclerView.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -67,10 +53,16 @@ public class TatCaCongViecFragment extends Fragment {
         return myView;
     }
 
-
-
-    public void get_all_congviec()  {
+    public void HienThiTatCaCongViec(){
         list_congviec = new ArrayList<>();
-            list_congviec=db.get_all_congviec();
+
+        list_congviec=db.get_all_congviec();
+
+        adapter = new TatCaCongViecAdapter(list_congviec, getActivity());
+        RecyclerView.LayoutManager mLayoutManager = new LinearLayoutManager(getActivity(), LinearLayoutManager.VERTICAL, false);
+        recyclerView.setLayoutManager(mLayoutManager);
+        recyclerView.setItemAnimator(new DefaultItemAnimator());
+        recyclerView.setAdapter(adapter);
     }
+
 }

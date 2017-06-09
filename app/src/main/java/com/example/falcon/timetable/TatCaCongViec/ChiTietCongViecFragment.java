@@ -5,6 +5,7 @@ import android.app.TimePickerDialog;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.support.v4.app.Fragment;
+import android.support.v4.app.FragmentManager;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -110,6 +111,10 @@ public class ChiTietCongViecFragment extends Fragment {
                     congViec.setTime_end(time_end);
 
                     db.update_congviec(congViec);
+                    FragmentManager fragmentManager = getFragmentManager();
+                    fragmentManager.beginTransaction().replace(R.id.content_frame, new TatCaCongViecFragment())
+                            .addToBackStack(null)
+                            .commit();
 
 
                 }else{

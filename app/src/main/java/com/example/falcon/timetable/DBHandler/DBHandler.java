@@ -233,8 +233,12 @@ public class DBHandler extends SQLiteOpenHelper {
                 congViec.setNote(cursor.getString(cursor.getColumnIndex(KEY_NOTE)));
 
                 list.add(congViec);
+                cursor.moveToNext();
             }
             close();
+        }
+        else{
+            Toast.makeText(context, "DB Empty!", Toast.LENGTH_SHORT).show();
         }
         return list;
     }

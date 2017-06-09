@@ -82,13 +82,13 @@ public class TatCaCongViecAdapter extends RecyclerView.Adapter<TatCaCongViecAdap
 
             v.setOnClickListener(this);
 
-//           delete.setOnClickListener(this);
+           delete.setOnClickListener(this);
 
 
             delete.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View v) {
-                    System.out.println("DELETEEEEEEEEEEEE");
+
                     AlertDialog.Builder builder1 = new AlertDialog.Builder(context);
                     builder1.setMessage("Bạn có chắc chắn muốn xóa không ?");
                     builder1.setCancelable(true);
@@ -100,6 +100,8 @@ public class TatCaCongViecAdapter extends RecyclerView.Adapter<TatCaCongViecAdap
 
                                     DBHandler db = new DBHandler(context);
                                     db.delete_congviec(list_congviec.get(getPosition()).getId());
+
+
                                 }
                             });
 
@@ -119,6 +121,8 @@ public class TatCaCongViecAdapter extends RecyclerView.Adapter<TatCaCongViecAdap
 
         @Override
         public void onClick(View v) {
+
+            // click item cardview on recyclerview
 
             AppCompatActivity activity = (AppCompatActivity) v.getContext();
             ChiTietCongViecFragment myFragment = new ChiTietCongViecFragment();
