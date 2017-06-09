@@ -40,7 +40,7 @@ public class ThemCongViecFragment extends Fragment {
     RadioButton rd_kll, rd_llttuan, rd_lltthang, rd_llhangngay;
     LinearLayout layoutk, layouthn, layouttt, layouttth;
     TextView kll_ngay, kll_gio_bd, kll_gio_kt; /*ll_gio_bd, ll_gio_kt, ll_ngay, lltt_ngay, lltt_gio_bd, lltt_gio_kt, lltth_ngay, lltth_gio_bd, lltth_gio_kt;*/
-    int day, month, year, dayf, monthf, yearf, hour, minute, hourf, minutef;
+    private int day, month, year, dayf, monthf, yearf, hour, minute, hourf, minutef;
 
     @Nullable
     @Override
@@ -222,7 +222,9 @@ public class ThemCongViecFragment extends Fragment {
                                             congViec.setTime_end(kll_gio_kt.getText().toString());
                                             congViec.setNote(description.getText().toString());
                                             db.insert_table_congviec(congViec);
-
+                                            List<CongViec> list = new ArrayList<>();
+                                            list = db.get_all_congviec();
+                                            Toast.makeText(getActivity(), list.size() + "", Toast.LENGTH_SHORT).show();
                                             FragmentManager fragmentManager = getFragmentManager();
                                             fragmentManager.beginTransaction().replace(R.id.content_frame, new ThoiGianBieu_Fragment())
                                                     .addToBackStack(null)

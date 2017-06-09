@@ -232,6 +232,7 @@ public class DBHandler extends SQLiteOpenHelper {
                 congViec.setNote(cursor.getString(cursor.getColumnIndex(KEY_NOTE)));
 
                 list.add(congViec);
+                cursor.moveToNext();
             }
             close();
         }
