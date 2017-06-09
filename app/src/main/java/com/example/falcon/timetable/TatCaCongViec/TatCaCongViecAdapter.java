@@ -82,7 +82,7 @@ public class TatCaCongViecAdapter extends RecyclerView.Adapter<TatCaCongViecAdap
 
             v.setOnClickListener(this);
 
-           delete.setOnClickListener(this);
+            delete.setOnClickListener(this);
 
 
             delete.setOnClickListener(new View.OnClickListener() {
@@ -100,6 +100,8 @@ public class TatCaCongViecAdapter extends RecyclerView.Adapter<TatCaCongViecAdap
 
                                     DBHandler db = new DBHandler(context);
                                     db.delete_congviec(list_congviec.get(getPosition()).getId());
+                                    list_congviec.remove(getPosition());
+                                    notifyItemRemoved(getPosition());
 
 
                                 }
