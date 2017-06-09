@@ -53,7 +53,7 @@ public class ThemCongViecFragment extends Fragment {
         /*layouthn = (LinearLayout) myView.findViewById(R.id.layout_hangngay);
         layouttt = (LinearLayout) myView.findViewById(R.id.layout_theotuan);
         layouttth = (LinearLayout) myView.findViewById(R.id.layout_theothang);*/
-        save = (Button)myView.findViewById(R.id.btn_themcongviec_luu);
+        save = (Button) myView.findViewById(R.id.btn_themcongviec_luu);
 
         //khong lap lai
         kll_ngay = (TextView) myView.findViewById(R.id.tv_kll_chonngay);
@@ -177,79 +177,126 @@ public class ThemCongViecFragment extends Fragment {
         save.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                if(option == 1){
-                    if(title.getText().toString().equals("")){
-                        Toast.makeText(getActivity(),"Vui lòng nhập tên công việc!",Toast.LENGTH_SHORT).show();
-                    }else{
-                        if(address.getText().toString().equals("")){
-                            Toast.makeText(getActivity(),"Vui lòng nhập địa điểm!",Toast.LENGTH_SHORT).show();
-                        }else {
-                            Toast.makeText(getActivity(),title.getText().toString() + "\n"
-                                    + address.getText().toString() + "\n"
-                                    + description.getText().toString() + "\n"
-                                    + kll_ngay.getText().toString() + "\n"
-                                    + kll_gio_bd.getText().toString() + "\n"
-                                    + kll_gio_kt.getText().toString() + "\n"
-                                    + "Không lặp lại!",Toast.LENGTH_SHORT).show();
-                        }
-                    }
-                }else{
-                    if(option == 2){
-                        if(title.getText().toString().equals("")){
-                            Toast.makeText(getActivity(),"Vui lòng nhập tên công việc!",Toast.LENGTH_SHORT).show();
-                        }else{
-                            if(address.getText().toString().equals("")){
-                                Toast.makeText(getActivity(),"Vui lòng nhập địa điểm!",Toast.LENGTH_SHORT).show();
-                            }else {
-                                Toast.makeText(getActivity(),title.getText().toString() + "\n"
-                                        + address.getText().toString() + "\n"
-                                        + description.getText().toString() + "\n"
-                                        + kll_ngay.getText().toString() + "\n"
-                                        + kll_gio_bd.getText().toString() + "\n"
-                                        + kll_gio_kt.getText().toString() + "\n"
-                                        + "Lặp lại hàng ngày!",Toast.LENGTH_SHORT).show();
-                            }
-                        }
-                    }else{
-                        if(option == 3){
-                            if(title.getText().toString().equals("")){
-                                Toast.makeText(getActivity(),"Vui lòng nhập tên công việc!",Toast.LENGTH_SHORT).show();
-                            }else{
-                                if(address.getText().toString().equals("")){
-                                    Toast.makeText(getActivity(),"Vui lòng nhập địa điểm!",Toast.LENGTH_SHORT).show();
-                                }else {
-                                    Toast.makeText(getActivity(),title.getText().toString() + "\n"
-                                            + address.getText().toString() + "\n"
-                                            + description.getText().toString() + "\n"
-                                            + kll_ngay.getText().toString() + "\n"
-                                            + kll_gio_bd.getText().toString() + "\n"
-                                            + kll_gio_kt.getText().toString() + "\n"
-                                            + "Lặp lại hàng tuần!",Toast.LENGTH_SHORT).show();
-                                }
-                            }
-                        }else {
-                            if(option == 4){
-                                if(title.getText().toString().equals("")){
-                                    Toast.makeText(getActivity(),"Vui lòng nhập tên công việc!",Toast.LENGTH_SHORT).show();
-                                }else{
-                                    if(address.getText().toString().equals("")){
-                                        Toast.makeText(getActivity(),"Vui lòng nhập địa điểm!",Toast.LENGTH_SHORT).show();
-                                    }else {
-                                        Toast.makeText(getActivity(),title.getText().toString() + "\n"
+                if (option == 1) {
+                    if (title.getText().toString().equals("")) {
+                        Toast.makeText(getActivity(), "Vui lòng nhập tên công việc!", Toast.LENGTH_SHORT).show();
+                    } else {
+                        if (address.getText().toString().equals("")) {
+                            Toast.makeText(getActivity(), "Vui lòng nhập địa điểm!", Toast.LENGTH_SHORT).show();
+                        } else {
+                            if (kll_ngay.getText().toString().equals("")) {
+                                Toast.makeText(getActivity(), "Vui lòng chọn ngày!", Toast.LENGTH_SHORT).show();
+                            } else {
+                                if (kll_gio_bd.getText().toString().equals("")) {
+                                    Toast.makeText(getActivity(), "Vui lòng chọn giờ bắt đầu!", Toast.LENGTH_SHORT).show();
+                                } else {
+                                    if (kll_gio_kt.getText().toString().equals("")) {
+                                        Toast.makeText(getActivity(), "Vui lòng chọn giờ dự kiến kết thúc!", Toast.LENGTH_SHORT).show();
+                                    } else {
+                                        Toast.makeText(getActivity(), title.getText().toString() + "\n"
                                                 + address.getText().toString() + "\n"
                                                 + description.getText().toString() + "\n"
                                                 + kll_ngay.getText().toString() + "\n"
                                                 + kll_gio_bd.getText().toString() + "\n"
                                                 + kll_gio_kt.getText().toString() + "\n"
-                                                + "Lặp lại hàng tháng!",Toast.LENGTH_SHORT).show();
+                                                + "Không lặp lại!", Toast.LENGTH_SHORT).show();
                                     }
                                 }
                             }
-                            else {
-                                Toast.makeText(getActivity(),title.getText().toString() + "\n"
+                        }
+                    }
+                } else {
+                    if (option == 2) {
+                        if (title.getText().toString().equals("")) {
+                            Toast.makeText(getActivity(), "Vui lòng nhập tên công việc!", Toast.LENGTH_SHORT).show();
+                        } else {
+                            if (address.getText().toString().equals("")) {
+                                Toast.makeText(getActivity(), "Vui lòng nhập địa điểm!", Toast.LENGTH_SHORT).show();
+                            } else {
+                                if (kll_ngay.getText().toString().equals("")) {
+                                    Toast.makeText(getActivity(), "Vui lòng chọn ngày!", Toast.LENGTH_SHORT).show();
+                                } else {
+                                    if (kll_gio_bd.getText().toString().equals("")) {
+                                        Toast.makeText(getActivity(), "Vui lòng chọn giờ bắt đầu!", Toast.LENGTH_SHORT).show();
+                                    } else {
+                                        if (kll_gio_kt.getText().toString().equals("")) {
+                                            Toast.makeText(getActivity(), "Vui lòng chọn giờ dự kiến kết thúc!", Toast.LENGTH_SHORT).show();
+                                        } else {
+                                            Toast.makeText(getActivity(), title.getText().toString() + "\n"
+                                                    + address.getText().toString() + "\n"
+                                                    + description.getText().toString() + "\n"
+                                                    + kll_ngay.getText().toString() + "\n"
+                                                    + kll_gio_bd.getText().toString() + "\n"
+                                                    + kll_gio_kt.getText().toString() + "\n"
+                                                    + "Lặp lại hàng ngày!", Toast.LENGTH_SHORT).show();
+                                        }
+                                    }
+                                }
+                            }
+                        }
+                    } else {
+                        if (option == 3) {
+                            if (title.getText().toString().equals("")) {
+                                Toast.makeText(getActivity(), "Vui lòng nhập tên công việc!", Toast.LENGTH_SHORT).show();
+                            } else {
+                                if (address.getText().toString().equals("")) {
+                                    Toast.makeText(getActivity(), "Vui lòng nhập địa điểm!", Toast.LENGTH_SHORT).show();
+                                } else {
+                                    if (kll_ngay.getText().toString().equals("")) {
+                                        Toast.makeText(getActivity(), "Vui lòng chọn ngày!", Toast.LENGTH_SHORT).show();
+                                    } else {
+                                        if (kll_gio_bd.getText().toString().equals("")) {
+                                            Toast.makeText(getActivity(), "Vui lòng chọn giờ bắt đầu!", Toast.LENGTH_SHORT).show();
+                                        } else {
+                                            if (kll_gio_kt.getText().toString().equals("")) {
+                                                Toast.makeText(getActivity(), "Vui lòng chọn giờ dự kiến kết thúc!", Toast.LENGTH_SHORT).show();
+                                            } else {
+                                                Toast.makeText(getActivity(), title.getText().toString() + "\n"
+                                                        + address.getText().toString() + "\n"
+                                                        + description.getText().toString() + "\n"
+                                                        + kll_ngay.getText().toString() + "\n"
+                                                        + kll_gio_bd.getText().toString() + "\n"
+                                                        + kll_gio_kt.getText().toString() + "\n"
+                                                        + "Lặp lại hàng tuần!", Toast.LENGTH_SHORT).show();
+                                            }
+                                        }
+                                    }
+                                }
+                            }
+                        } else {
+                            if (option == 4) {
+                                if (title.getText().toString().equals("")) {
+                                    Toast.makeText(getActivity(), "Vui lòng nhập tên công việc!", Toast.LENGTH_SHORT).show();
+                                } else {
+                                    if (address.getText().toString().equals("")) {
+                                        Toast.makeText(getActivity(), "Vui lòng nhập địa điểm!", Toast.LENGTH_SHORT).show();
+                                    } else {
+                                        if (kll_ngay.getText().toString().equals("")) {
+                                            Toast.makeText(getActivity(), "Vui lòng chọn ngày!", Toast.LENGTH_SHORT).show();
+                                        } else {
+                                            if (kll_gio_bd.getText().toString().equals("")) {
+                                                Toast.makeText(getActivity(), "Vui lòng chọn giờ bắt đầu!", Toast.LENGTH_SHORT).show();
+                                            } else {
+                                                if (kll_gio_kt.getText().toString().equals("")) {
+                                                    Toast.makeText(getActivity(), "Vui lòng chọn giờ dự kiến kết thúc!", Toast.LENGTH_SHORT).show();
+                                                } else {
+                                                    Toast.makeText(getActivity(), title.getText().toString() + "\n"
+                                                            + address.getText().toString() + "\n"
+                                                            + description.getText().toString() + "\n"
+                                                            + kll_ngay.getText().toString() + "\n"
+                                                            + kll_gio_bd.getText().toString() + "\n"
+                                                            + kll_gio_kt.getText().toString() + "\n"
+                                                            + "Lặp lại hàng tháng!", Toast.LENGTH_SHORT).show();
+                                                }
+                                            }
+                                        }
+                                    }
+                                }
+                            } else {
+                                Toast.makeText(getActivity(), title.getText().toString() + "\n"
                                         + address.getText().toString() + "\n"
                                         + description.getText().toString() + "\n"
-                                        + "Bạn chưa chọn chế độ lặp",Toast.LENGTH_SHORT).show();
+                                        + "Bạn chưa chọn chế độ lặp", Toast.LENGTH_SHORT).show();
                             }
                         }
                     }
