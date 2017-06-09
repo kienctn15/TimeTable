@@ -47,7 +47,9 @@ public class TatCaCongViecFragment extends Fragment {
         list_congviec.add(congViec);
         list_congviec.add(congViec1);
         list_congviec.add(congViec2);
-        System.out.println("__________________" + list_congviec.size());
+        db.insert_table_congviec(list_congviec.get(0));
+        db.insert_table_congviec(list_congviec.get(1));
+        db.insert_table_congviec(list_congviec.get(2));
 
         adapter = new TatCaCongViecAdapter(list_congviec, getActivity());
         RecyclerView.LayoutManager mLayoutManager = new LinearLayoutManager(getActivity(), LinearLayoutManager.VERTICAL, false);

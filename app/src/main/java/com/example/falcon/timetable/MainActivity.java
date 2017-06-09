@@ -68,6 +68,8 @@ public class MainActivity extends AppCompatActivity
             View headerView = navigationView.getHeaderView(0);
             tv_header_username = (TextView) headerView.findViewById(R.id.tv_header_username);
             tv_header_name = (TextView) headerView.findViewById(R.id.tv_header_name);
+
+            tv_header_username.setText(username);
         }else{
 
             Intent intent = new Intent(this, LoginActivity.class);
@@ -128,7 +130,10 @@ public class MainActivity extends AppCompatActivity
 
         } else if (id == R.id.nav_share) {
 
-        } else if (id == R.id.nav_send) {
+        } else if (id == R.id.nav_logout) {
+            userSessionManager.logoutUser();
+            Intent intent = new Intent(MainActivity.this, LoginActivity.class);
+            startActivity(intent);
 
         }
 

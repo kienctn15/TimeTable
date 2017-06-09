@@ -27,12 +27,13 @@ public class DBHandler extends SQLiteOpenHelper {
     // insert sql date : dd/MM/yyyy
     // time : HH:mm:ss
 
-    private static final String DATABASE_NAME="db_timetable_vnpt_2";
+    private static final String DATABASE_NAME="db_timetable_vnpt_3";
     private static final int DATABASE_VERSION=1;
 
-    public static final String KEY_ID="id";
+
 
     // Bảng USER
+    public static final String KEY_ID_USER="id";
     public static final String TABLE_NAME_USER="tbl_user";
     public static final String KEY_USERNAME = "username";
     public static final String KEY_PASSWORD="password";
@@ -40,6 +41,7 @@ public class DBHandler extends SQLiteOpenHelper {
 
     // Bảng Công việc
     public static final String TABLE_NAME_CONGVIEC="tbl_congviec";
+    public static final String KEY_ID_CONGVIEC="id";
     public static final String KEY_TITLE = "title";
     public static final String KEY_ADDRESS="address";
     public static final String KEY_DATE="date";
@@ -53,7 +55,7 @@ public class DBHandler extends SQLiteOpenHelper {
 
     // Tạo bảng USER
     private static final String CREATE_TABLE_USER=" CREATE TABLE " + TABLE_NAME_USER + " ( "
-            + KEY_ID + " INTEGER PRIMARY KEY AUTOINCREMENT, "
+            + KEY_ID_USER + " INTEGER PRIMARY KEY AUTOINCREMENT, "
             + KEY_USERNAME + " TEXT , "
             + KEY_PASSWORD + " TEXT )";
 
@@ -61,7 +63,7 @@ public class DBHandler extends SQLiteOpenHelper {
 
     // Tạo bảng Công Việc
     private static final String CREATE_TABLE_CONGVIEC=" CREATE TABLE " + TABLE_NAME_CONGVIEC+ " ( "
-            + KEY_ID + " INTEGER PRIMARY KEY AUTOINCREMENT, "
+            + KEY_ID_CONGVIEC + " INTEGER PRIMARY KEY AUTOINCREMENT, "
             + KEY_TITLE + " TEXT , "
             + KEY_ADDRESS + " TEXT , "
             + KEY_DATE + " TEXT , "
@@ -196,7 +198,7 @@ public class DBHandler extends SQLiteOpenHelper {
         values.put(KEY_TIME_START,congViec.getTime_start());
         values.put(KEY_TIME_END,congViec.getTime_end());
         values.put(KEY_NOTE,congViec.getNote());
-       if( db.update(TABLE_NAME_CONGVIEC,values,KEY_ID +" =? ",new String[]{String.valueOf(congViec.getId())})!=-1){
+       if( db.update(TABLE_NAME_CONGVIEC,values,KEY_ID_CONGVIEC +" =? ",new String[]{String.valueOf(congViec.getId())})!=-1){
            Toast.makeText(context, "Sửa thành công", Toast.LENGTH_SHORT).show();
        }else{
            Toast.makeText(context, "Sửa thất bại", Toast.LENGTH_SHORT).show();
@@ -205,7 +207,7 @@ public class DBHandler extends SQLiteOpenHelper {
 
     public void delete_congviec(int id){
         open();
-        if(db.delete(TABLE_NAME_CONGVIEC,KEY_ID + " =? ",new String[]{String.valueOf(id)})!=-1){
+        if(db.delete(TABLE_NAME_CONGVIEC,KEY_ID_CONGVIEC + " =? ",new String[]{String.valueOf(id)})!=-1){
             Toast.makeText(context,"Xóa Thành Công " ,Toast.LENGTH_SHORT).show();
         }else{
             Toast.makeText(context,"Xóa Thất Bại " ,Toast.LENGTH_SHORT).show();
@@ -216,12 +218,14 @@ public class DBHandler extends SQLiteOpenHelper {
     public List<CongViec> get_all_congviec() {
         open();
         List<CongViec> list = new ArrayList<>();
-        Cursor cursor = db.query(TABLE_NAME_CONGVIEC,null,null,null,null,null,null);
+        String[] cols = new String[]{KEY_ID_CONGVIEC, KEY_TITLE, KEY_ADDRESS,KEY_DATE,KEY_TIME_START,KEY_TIME_END,KEY_NOTE};
+        Cursor cursor = db.query(TABLE_NAME_CONGVIEC,cols,null,null,null,null,null);
         if(cursor!=null){
             cursor.moveToFirst();
             while (!cursor.isAfterLast()){
                 CongViec congViec = new CongViec();
-                congViec.setId(Integer.parseInt(cursor.getString(cursor.getColumnIndex(KEY_ID))));
+                congViec.setId(Integer.parseInt(cursor.getString(cursor.getColumnIndex(KEY_ID_CONGVIEC))));
+                congViec.setTitle(cursor.getString(cursor.getColumnIndex(KEY_TITLE)));
                 congViec.setAddress(cursor.getString(cursor.getColumnIndex(KEY_ADDRESS)));
                 congViec.setDate(cursor.getString(cursor.getColumnIndex(KEY_DATE)));
                 congViec.setTime_start(cursor.getString(cursor.getColumnIndex(KEY_TIME_START)));
@@ -230,11 +234,9 @@ public class DBHandler extends SQLiteOpenHelper {
 
                 list.add(congViec);
             }
+            close();
         }
-        close();
-
         return list;
-
     }
 
 }
