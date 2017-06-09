@@ -170,7 +170,6 @@ public class DBHandler extends SQLiteOpenHelper {
     // TABLE CONG VIEC
     public void insert_table_congviec(CongViec congViec){
         open();
-
         ContentValues values=new ContentValues();
         values.put(KEY_TITLE,congViec.getTitle());
         values.put(KEY_ADDRESS,congViec.getAddress());
@@ -178,7 +177,7 @@ public class DBHandler extends SQLiteOpenHelper {
         values.put(KEY_TIME_START,congViec.getTime_start());
         values.put(KEY_TIME_END,congViec.getTime_end());
         values.put(KEY_NOTE,congViec.getNote());
-
+        db.insert(TABLE_NAME_CONGVIEC,null,values);
         if(db.insert(TABLE_NAME_CONGVIEC,null,values)!=-1){
             Toast.makeText(context,"Thêm Thành Công!" ,Toast.LENGTH_SHORT).show();
 
