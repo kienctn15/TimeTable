@@ -40,14 +40,8 @@ public class TatCaCongViecFragment extends Fragment {
         recyclerView = (RecyclerView) myView.findViewById(R.id.recyclerview_tatcacongviec);
         recyclerView.setHasFixedSize(true);
         db = new DBHandler(getContext());
-        get_all_congviec();
 
-
-        adapter = new TatCaCongViecAdapter(list_congviec, getActivity());
-        RecyclerView.LayoutManager mLayoutManager = new LinearLayoutManager(getActivity(), LinearLayoutManager.VERTICAL, false);
-        recyclerView.setLayoutManager(mLayoutManager);
-        recyclerView.setItemAnimator(new DefaultItemAnimator());
-        recyclerView.setAdapter(adapter);
+        HienThiTatCaCongViec();
 
         recyclerView.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -59,10 +53,16 @@ public class TatCaCongViecFragment extends Fragment {
         return myView;
     }
 
-
-
-    public void get_all_congviec()  {
+    public void HienThiTatCaCongViec(){
         list_congviec = new ArrayList<>();
+
         list_congviec=db.get_all_congviec();
+
+        adapter = new TatCaCongViecAdapter(list_congviec, getActivity());
+        RecyclerView.LayoutManager mLayoutManager = new LinearLayoutManager(getActivity(), LinearLayoutManager.VERTICAL, false);
+        recyclerView.setLayoutManager(mLayoutManager);
+        recyclerView.setItemAnimator(new DefaultItemAnimator());
+        recyclerView.setAdapter(adapter);
     }
+
 }
