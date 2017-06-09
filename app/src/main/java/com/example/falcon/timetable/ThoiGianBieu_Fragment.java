@@ -13,6 +13,7 @@ import android.widget.TextView;
 
 import com.example.falcon.timetable.DBHandler.DBHandler;
 import com.example.falcon.timetable.DanhSachCongViec.CongViec;
+import com.example.falcon.timetable.DanhSachCongViec.DanhSachCongViecFragment;
 import com.example.falcon.timetable.DanhSachCongViec.ThemCongViecFragment;
 import com.github.sundeepk.compactcalendarview.CompactCalendarView;
 import com.github.sundeepk.compactcalendarview.domain.Event;
@@ -79,6 +80,25 @@ public class ThoiGianBieu_Fragment extends Fragment {
             @Override
             public void onDayClick(Date dateClicked) {
                 List<Event> events = compactCalendar.getEvents(dateClicked);
+                ArrayList<String> evt = new ArrayList<String>();
+                for (int i = 0; i < events.size(); i++) {
+                    Event event = events.get(i);
+                    String data = event.getData().toString();
+                    System.out.println(data + "=======================");
+                    evt.add(data);
+                }
+
+
+                Bundle bundle = new Bundle();
+                bundle.putStringArrayList("data", evt);
+
+                DanhSachCongViecFragment danhSachCongViecFragment = new DanhSachCongViecFragment();
+                danhSachCongViecFragment.setArguments(bundle);
+
+                FragmentManager fragmentManager = getFragmentManager();
+                fragmentManager.beginTransaction().replace(R.id.content_frame, danhSachCongViecFragment).addToBackStack(null).commit();
+
+
             }
 
             @Override
@@ -153,7 +173,7 @@ public class ThoiGianBieu_Fragment extends Fragment {
 
                 long epoch = 0;
                 try {
-                    epoch = new SimpleDateFormat("dd/MM/yyyy HH:mm:ss").parse(date + " " + start+   ":00").getTime() / 1000;
+                    epoch = new SimpleDateFormat("dd/MM/yyyy HH:mm:ss").parse(date + " " + start + ":00").getTime() / 1000;
                 } catch (ParseException e) {
                     e.printStackTrace();
                 }

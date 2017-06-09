@@ -27,6 +27,17 @@
                 android:orientation="horizontal">
 
                 <TextView
+                    android:id="@+id/item_congviec_Date"
+                    android:layout_width="wrap_content"
+                    android:layout_height="match_parent"
+                    android:layout_marginLeft="10dp"
+                    android:layout_marginTop="10dp"
+                    android:layout_weight="1"
+                    android:text="Date"
+                    android:textSize="18sp"
+                    android:textStyle="bold" />
+
+                <TextView
                     android:id="@+id/item_congviec_Time"
                     android:layout_width="wrap_content"
                     android:layout_height="match_parent"
@@ -34,20 +45,14 @@
                     android:layout_marginTop="10dp"
                     android:layout_weight="1"
                     android:text="Time"
-                    android:textStyle="bold"
-                    android:textSize="18sp" />
+                    android:textSize="18sp"
+                    android:textStyle="bold" />
+
 
                 <LinearLayout
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:orientation="horizontal">
-
-                    <ImageButton
-                        android:id="@+id/item_congviec_Edit"
-                        android:layout_width="wrap_content"
-                        android:layout_height="match_parent"
-                        android:layout_marginTop="10dp"
-                        android:background="@drawable/ic_edit_black_24dp" />
 
                     <ImageButton
                         android:id="@+id/item_congviec_Delete"
@@ -56,7 +61,7 @@
                         android:layout_marginRight="5dp"
                         android:layout_marginTop="10dp"
                         android:background="@drawable/ic_delete_forever_black_24dp"
-                        android:ellipsize="end"/>
+                        android:ellipsize="end" />
                 </LinearLayout>
             </LinearLayout>
 
@@ -65,35 +70,39 @@
                 android:layout_height="2dp"
                 android:layout_margin="5dp"
                 android:background="#000000" />
+
             <LinearLayout
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:paddingTop="5dp"
+                android:orientation="vertical"
                 android:paddingLeft="10dp"
                 android:paddingRight="10dp"
-                android:orientation="vertical">
+                android:paddingTop="5dp">
+
                 <TextView
+                    android:id="@+id/item_congviec_Title"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:textSize="20sp"
                     android:text="item_congviec_Title"
-                    android:id="@+id/item_congviec_Title"/>
+                    android:textSize="20sp" />
+
                 <TextView
+                    android:id="@+id/item_congviec_Address"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:textSize="16sp"
+                    android:ellipsize="end"
+                    android:maxLines="3"
                     android:text="item_congviec_Address"
-                    android:ellipsize="end"
-                    android:maxLines="3"
-                    android:id="@+id/item_congviec_Address" />
+                    android:textSize="16sp" />
+
                 <TextView
+                    android:id="@+id/item_congviec_Description"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:textSize="16sp"
-                    android:text="item_congviec_Description"
                     android:ellipsize="end"
                     android:maxLines="3"
-                    android:id="@+id/item_congviec_Description" />
+                    android:text="item_congviec_Description"
+                    android:textSize="16sp" />
             </LinearLayout>
         </LinearLayout>
     </android.support.v7.widget.CardView>
