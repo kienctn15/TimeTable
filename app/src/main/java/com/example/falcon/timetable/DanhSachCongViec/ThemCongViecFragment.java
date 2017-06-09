@@ -292,11 +292,11 @@ public class ThemCongViecFragment extends Fragment {
                                                         Date newDate = c.getTime();
                                                         String newFormattedDate = dateParser.format(newDate);
                                                         congViec.setDate(newFormattedDate);
-                                                        db.insert_table_congviec(congViec);
                                                     } catch (ParseException e) {
                                                         e.printStackTrace();
                                                         //handle exception
                                                     }
+                                                    db.insert_table_congviec_laplai(congViec);
                                                 }
                                                 Toast.makeText(getActivity(), "Lặp lịch hàng ngày thành công!", Toast.LENGTH_SHORT).show();
                                                 /*Toast.makeText(getActivity(), title.getText().toString() + "\n"
@@ -351,15 +351,16 @@ public class ThemCongViecFragment extends Fragment {
                                                             Date myDate = dateParser.parse(strdate);
                                                             Calendar c = Calendar.getInstance();
                                                             c.setTime(myDate);
-                                                            c.set(Calendar.DAY_OF_YEAR, c.get(Calendar.DAY_OF_YEAR) + (i * 7));
+                                                            c.add(Calendar.DAY_OF_YEAR, i * 7);
                                                             Date newDate = c.getTime();
                                                             String newFormattedDate = dateParser.format(newDate);
                                                             congViec.setDate(newFormattedDate);
-                                                            db.insert_table_congviec(congViec);
+
                                                         } catch (ParseException e) {
                                                             e.printStackTrace();
                                                             //handle exception
                                                         }
+                                                        db.insert_table_congviec_laplai(congViec);
                                                     }
                                                     Toast.makeText(getActivity(), "Lặp lịch hàng tuần thành công!", Toast.LENGTH_SHORT).show();
                                                     /*Toast.makeText(getActivity(), title.getText().toString() + "\n"
@@ -418,13 +419,13 @@ public class ThemCongViecFragment extends Fragment {
                                                                 Date newDate = c.getTime();
                                                                 String newFormattedDate = dateParser.format(newDate);
                                                                 congViec.setDate(newFormattedDate);
-                                                                db.insert_table_congviec(congViec);
                                                             } catch (ParseException e) {
                                                                 e.printStackTrace();
                                                                 //handle exception
                                                             }
+                                                            db.insert_table_congviec_laplai(congViec);
                                                         }
-                                                        Toast.makeText(getActivity(), "Lặp lịch hàng tháng thành công!", Toast.LENGTH_SHORT).show();
+                                                        Toast.makeText(getActivity(), "Lặp lịch hàng tháng   thành công!", Toast.LENGTH_SHORT).show();
                                                         /*Toast.makeText(getActivity(), title.getText().toString() + "\n"
                                                                 + address.getText().toString() + "\n"
                                                                 + description.getText().toString() + "\n"
