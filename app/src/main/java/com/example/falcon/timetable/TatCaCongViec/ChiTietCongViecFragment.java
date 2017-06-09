@@ -99,17 +99,17 @@ public class ChiTietCongViecFragment extends Fragment {
 
                 if(title.length() >0 && address.length()>0 && date.length()>0 && note.length()>0 && time_start.length()>0 && time_end.length()>0){
 
-//                    CongViec congViec = new CongViec();
-//
-//                    congViec.setId(Integer.parseInt(bundle.getString("id")));
-//                    congViec.setTitle(title);
-//                    congViec.setAddress(address);
-//                    congViec.setDate(date);
-//                    congViec.setNote(note);
-//                    congViec.setTime_start(time_start);
-//                    congViec.setTime_end(time_end);
-//
-//                    db.update_congviec(congViec);
+                    CongViec congViec = new CongViec();
+
+                    congViec.setId(Integer.parseInt(bundle.getString("id")));
+                    congViec.setTitle(title);
+                    congViec.setAddress(address);
+                    congViec.setDate(date);
+                    congViec.setNote(note);
+                    congViec.setTime_start(time_start);
+                    congViec.setTime_end(time_end);
+
+                    db.update_congviec(congViec);
 
 
                 }else{
