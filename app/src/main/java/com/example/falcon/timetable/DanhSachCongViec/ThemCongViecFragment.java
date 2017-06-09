@@ -20,7 +20,10 @@ import android.widget.TimePicker;
 import android.widget.Toast;
 
 import com.example.falcon.timetable.R;
+import com.example.falcon.timetable.ThoiGianBieu_Fragment;
 
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
 import java.util.Calendar;
 
 
@@ -104,15 +107,15 @@ public class ThemCongViecFragment extends Fragment {
                                                     dayf = dayOfMonth;
                                                     if (monthf > 9) {
                                                         if (dayf > 9)
-                                                            kll_ngay.setText(monthf + " - " + dayf + " - " + yearf);
+                                                            kll_ngay.setText(dayf + " - " + monthf + " - " + yearf);
                                                         else
-                                                            kll_ngay.setText(monthf + " - 0" + dayf + " - " + yearf);
+                                                            kll_ngay.setText("0" + dayf + " - " + monthf + " - " + yearf);
 
                                                     } else {
                                                         if (dayf > 9)
-                                                            kll_ngay.setText("0" + monthf + " - " + dayf + " - " + yearf);
+                                                            kll_ngay.setText(dayf + " - " + "0" + monthf + " - " + yearf);
                                                         else
-                                                            kll_ngay.setText("0" + monthf + " - 0" + dayf + " - " + yearf);
+                                                            kll_ngay.setText("0" + dayf + " - " + "0" + monthf + " - " + yearf);
                                                     }
                                                 }
                                             }, year, month, day);
@@ -184,22 +187,30 @@ public class ThemCongViecFragment extends Fragment {
                         if (address.getText().toString().equals("")) {
                             Toast.makeText(getActivity(), "Vui lòng nhập địa điểm!", Toast.LENGTH_SHORT).show();
                         } else {
-                            if (kll_ngay.getText().toString().equals("")) {
+                            if (kll_ngay.getText().toString().equals("Ngày")) {
                                 Toast.makeText(getActivity(), "Vui lòng chọn ngày!", Toast.LENGTH_SHORT).show();
                             } else {
-                                if (kll_gio_bd.getText().toString().equals("")) {
+                                if (kll_gio_bd.getText().toString().equals("Giờ bắt đầu")) {
                                     Toast.makeText(getActivity(), "Vui lòng chọn giờ bắt đầu!", Toast.LENGTH_SHORT).show();
                                 } else {
-                                    if (kll_gio_kt.getText().toString().equals("")) {
+                                    if (kll_gio_kt.getText().toString().equals("Dự kiến kết thúc")) {
                                         Toast.makeText(getActivity(), "Vui lòng chọn giờ dự kiến kết thúc!", Toast.LENGTH_SHORT).show();
                                     } else {
-                                        Toast.makeText(getActivity(), title.getText().toString() + "\n"
-                                                + address.getText().toString() + "\n"
-                                                + description.getText().toString() + "\n"
-                                                + kll_ngay.getText().toString() + "\n"
-                                                + kll_gio_bd.getText().toString() + "\n"
-                                                + kll_gio_kt.getText().toString() + "\n"
-                                                + "Không lặp lại!", Toast.LENGTH_SHORT).show();
+                                        if (TimeValidator(kll_gio_bd.getText().toString(), kll_gio_kt.getText().toString()) == false) {
+                                            Toast.makeText(getActivity(), "Vui lòng chọn giờ dự kiến kết thúc LỚN HƠN giờ bắt đầu!", Toast.LENGTH_SHORT).show();
+                                        } else {
+                                            Toast.makeText(getActivity(), title.getText().toString() + "\n"
+                                                    + address.getText().toString() + "\n"
+                                                    + description.getText().toString() + "\n"
+                                                    + kll_ngay.getText().toString() + "\n"
+                                                    + kll_gio_bd.getText().toString() + "\n"
+                                                    + kll_gio_kt.getText().toString() + "\n"
+                                                    + "Không lặp lại!", Toast.LENGTH_SHORT).show();
+                                            FragmentManager fragmentManager = getFragmentManager();
+                                            fragmentManager.beginTransaction().replace(R.id.content_frame, new ThoiGianBieu_Fragment())
+                                                    .addToBackStack(null)
+                                                    .commit();
+                                        }
                                     }
                                 }
                             }
@@ -213,22 +224,30 @@ public class ThemCongViecFragment extends Fragment {
                             if (address.getText().toString().equals("")) {
                                 Toast.makeText(getActivity(), "Vui lòng nhập địa điểm!", Toast.LENGTH_SHORT).show();
                             } else {
-                                if (kll_ngay.getText().toString().equals("")) {
+                                if (kll_ngay.getText().toString().equals("Ngày")) {
                                     Toast.makeText(getActivity(), "Vui lòng chọn ngày!", Toast.LENGTH_SHORT).show();
                                 } else {
-                                    if (kll_gio_bd.getText().toString().equals("")) {
+                                    if (kll_gio_bd.getText().toString().equals("Giờ bắt đầu")) {
                                         Toast.makeText(getActivity(), "Vui lòng chọn giờ bắt đầu!", Toast.LENGTH_SHORT).show();
                                     } else {
-                                        if (kll_gio_kt.getText().toString().equals("")) {
+                                        if (kll_gio_kt.getText().toString().equals("Dự kiến kết thúc")) {
                                             Toast.makeText(getActivity(), "Vui lòng chọn giờ dự kiến kết thúc!", Toast.LENGTH_SHORT).show();
                                         } else {
-                                            Toast.makeText(getActivity(), title.getText().toString() + "\n"
-                                                    + address.getText().toString() + "\n"
-                                                    + description.getText().toString() + "\n"
-                                                    + kll_ngay.getText().toString() + "\n"
-                                                    + kll_gio_bd.getText().toString() + "\n"
-                                                    + kll_gio_kt.getText().toString() + "\n"
-                                                    + "Lặp lại hàng ngày!", Toast.LENGTH_SHORT).show();
+                                            if (TimeValidator(kll_gio_bd.getText().toString(), kll_gio_kt.getText().toString()) == false) {
+                                                Toast.makeText(getActivity(), "Vui lòng chọn giờ dự kiến kết thúc LỚN HƠN giờ bắt đầu!", Toast.LENGTH_SHORT).show();
+                                            } else {
+                                                Toast.makeText(getActivity(), title.getText().toString() + "\n"
+                                                        + address.getText().toString() + "\n"
+                                                        + description.getText().toString() + "\n"
+                                                        + kll_ngay.getText().toString() + "\n"
+                                                        + kll_gio_bd.getText().toString() + "\n"
+                                                        + kll_gio_kt.getText().toString() + "\n"
+                                                        + "Lặp lại hàng ngày!", Toast.LENGTH_SHORT).show();
+                                                FragmentManager fragmentManager = getFragmentManager();
+                                                fragmentManager.beginTransaction().replace(R.id.content_frame, new ThoiGianBieu_Fragment())
+                                                        .addToBackStack(null)
+                                                        .commit();
+                                            }
                                         }
                                     }
                                 }
@@ -242,22 +261,30 @@ public class ThemCongViecFragment extends Fragment {
                                 if (address.getText().toString().equals("")) {
                                     Toast.makeText(getActivity(), "Vui lòng nhập địa điểm!", Toast.LENGTH_SHORT).show();
                                 } else {
-                                    if (kll_ngay.getText().toString().equals("")) {
+                                    if (kll_ngay.getText().toString().equals("Ngày")) {
                                         Toast.makeText(getActivity(), "Vui lòng chọn ngày!", Toast.LENGTH_SHORT).show();
                                     } else {
-                                        if (kll_gio_bd.getText().toString().equals("")) {
+                                        if (kll_gio_bd.getText().toString().equals("Giờ bắt đầu")) {
                                             Toast.makeText(getActivity(), "Vui lòng chọn giờ bắt đầu!", Toast.LENGTH_SHORT).show();
                                         } else {
-                                            if (kll_gio_kt.getText().toString().equals("")) {
+                                            if (kll_gio_kt.getText().toString().equals("Dự kiến kết thúc")) {
                                                 Toast.makeText(getActivity(), "Vui lòng chọn giờ dự kiến kết thúc!", Toast.LENGTH_SHORT).show();
                                             } else {
-                                                Toast.makeText(getActivity(), title.getText().toString() + "\n"
-                                                        + address.getText().toString() + "\n"
-                                                        + description.getText().toString() + "\n"
-                                                        + kll_ngay.getText().toString() + "\n"
-                                                        + kll_gio_bd.getText().toString() + "\n"
-                                                        + kll_gio_kt.getText().toString() + "\n"
-                                                        + "Lặp lại hàng tuần!", Toast.LENGTH_SHORT).show();
+                                                if (TimeValidator(kll_gio_bd.getText().toString(), kll_gio_kt.getText().toString()) == false) {
+                                                    Toast.makeText(getActivity(), "Vui lòng chọn giờ dự kiến kết thúc LỚN HƠN giờ bắt đầu!", Toast.LENGTH_SHORT).show();
+                                                } else {
+                                                    Toast.makeText(getActivity(), title.getText().toString() + "\n"
+                                                            + address.getText().toString() + "\n"
+                                                            + description.getText().toString() + "\n"
+                                                            + kll_ngay.getText().toString() + "\n"
+                                                            + kll_gio_bd.getText().toString() + "\n"
+                                                            + kll_gio_kt.getText().toString() + "\n"
+                                                            + "Lặp lại hàng tuần!", Toast.LENGTH_SHORT).show();
+                                                    FragmentManager fragmentManager = getFragmentManager();
+                                                    fragmentManager.beginTransaction().replace(R.id.content_frame, new ThoiGianBieu_Fragment())
+                                                            .addToBackStack(null)
+                                                            .commit();
+                                                }
                                             }
                                         }
                                     }
@@ -271,32 +298,64 @@ public class ThemCongViecFragment extends Fragment {
                                     if (address.getText().toString().equals("")) {
                                         Toast.makeText(getActivity(), "Vui lòng nhập địa điểm!", Toast.LENGTH_SHORT).show();
                                     } else {
-                                        if (kll_ngay.getText().toString().equals("")) {
+                                        if (kll_ngay.getText().toString().equals("Ngày")) {
                                             Toast.makeText(getActivity(), "Vui lòng chọn ngày!", Toast.LENGTH_SHORT).show();
                                         } else {
-                                            if (kll_gio_bd.getText().toString().equals("")) {
+                                            if (kll_gio_bd.getText().toString().equals("Giờ bắt đầu")) {
                                                 Toast.makeText(getActivity(), "Vui lòng chọn giờ bắt đầu!", Toast.LENGTH_SHORT).show();
                                             } else {
-                                                if (kll_gio_kt.getText().toString().equals("")) {
+                                                if (kll_gio_kt.getText().toString().equals("Dự kiến kết thúc")) {
                                                     Toast.makeText(getActivity(), "Vui lòng chọn giờ dự kiến kết thúc!", Toast.LENGTH_SHORT).show();
                                                 } else {
-                                                    Toast.makeText(getActivity(), title.getText().toString() + "\n"
-                                                            + address.getText().toString() + "\n"
-                                                            + description.getText().toString() + "\n"
-                                                            + kll_ngay.getText().toString() + "\n"
-                                                            + kll_gio_bd.getText().toString() + "\n"
-                                                            + kll_gio_kt.getText().toString() + "\n"
-                                                            + "Lặp lại hàng tháng!", Toast.LENGTH_SHORT).show();
+                                                    if (TimeValidator(kll_gio_bd.getText().toString(), kll_gio_kt.getText().toString()) == false) {
+                                                        Toast.makeText(getActivity(), "Vui lòng chọn giờ dự kiến kết thúc LỚN HƠN giờ bắt đầu!", Toast.LENGTH_SHORT).show();
+                                                    } else {
+                                                        Toast.makeText(getActivity(), title.getText().toString() + "\n"
+                                                                + address.getText().toString() + "\n"
+                                                                + description.getText().toString() + "\n"
+                                                                + kll_ngay.getText().toString() + "\n"
+                                                                + kll_gio_bd.getText().toString() + "\n"
+                                                                + kll_gio_kt.getText().toString() + "\n"
+                                                                + "Lặp lại hàng tháng!", Toast.LENGTH_SHORT).show();
+                                                        FragmentManager fragmentManager = getFragmentManager();
+                                                        fragmentManager.beginTransaction().replace(R.id.content_frame, new ThoiGianBieu_Fragment())
+                                                                .addToBackStack(null)
+                                                                .commit();
+                                                    }
                                                 }
                                             }
                                         }
                                     }
                                 }
                             } else {
-                                Toast.makeText(getActivity(), title.getText().toString() + "\n"
-                                        + address.getText().toString() + "\n"
-                                        + description.getText().toString() + "\n"
-                                        + "Bạn chưa chọn chế độ lặp", Toast.LENGTH_SHORT).show();
+                                if (title.getText().toString().equals("")) {
+                                    Toast.makeText(getActivity(), "Vui lòng nhập tên công việc!", Toast.LENGTH_SHORT).show();
+                                } else {
+                                    if (address.getText().toString().equals("")) {
+                                        Toast.makeText(getActivity(), "Vui lòng nhập địa điểm!", Toast.LENGTH_SHORT).show();
+                                    } else {
+                                        if (kll_ngay.getText().toString().equals("Ngày")) {
+                                            Toast.makeText(getActivity(), "Vui lòng chọn ngày!", Toast.LENGTH_SHORT).show();
+                                        } else {
+                                            if (kll_gio_bd.getText().toString().equals("Giờ bắt đầu")) {
+                                                Toast.makeText(getActivity(), "Vui lòng chọn giờ bắt đầu!", Toast.LENGTH_SHORT).show();
+                                            } else {
+                                                if (kll_gio_kt.getText().toString().equals("Dự kiến kết thúc")) {
+                                                    Toast.makeText(getActivity(), "Vui lòng chọn giờ dự kiến kết thúc!", Toast.LENGTH_SHORT).show();
+                                                } else {
+                                                    if (TimeValidator(kll_gio_bd.getText().toString(), kll_gio_kt.getText().toString()) == false) {
+                                                        Toast.makeText(getActivity(), "Vui lòng chọn giờ dự kiến kết thúc LỚN HƠN giờ bắt đầu!", Toast.LENGTH_SHORT).show();
+                                                    } else {
+                                                        Toast.makeText(getActivity(), title.getText().toString() + "\n"
+                                                                + address.getText().toString() + "\n"
+                                                                + description.getText().toString() + "\n"
+                                                                + "Bạn chưa chọn chế độ lặp", Toast.LENGTH_SHORT).show();
+                                                    }
+                                                }
+                                            }
+                                        }
+                                    }
+                                }
                             }
                         }
                     }
@@ -304,6 +363,22 @@ public class ThemCongViecFragment extends Fragment {
             }
         });
         return myView;
+    }
+
+    public boolean TimeValidator(String time1, String time2) {
+
+        SimpleDateFormat sdf = new SimpleDateFormat("HH:mm");
+        boolean b = false;
+        try {
+            java.util.Date ArrTime = sdf.parse(time1);
+            java.util.Date DepTime = sdf.parse(time2);
+            // Function to check whether a time is after an another time
+            b = DepTime.after(ArrTime);
+        } catch (ParseException e) {
+            // TODO Auto-generated catch block
+            e.printStackTrace();
+        }
+        return b;
     }
 }
 

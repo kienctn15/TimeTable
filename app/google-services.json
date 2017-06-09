@@ -1,0 +1,48 @@
+{
+  "project_info": {
+    "project_number": "1098912792571",
+    "project_id": "timetable-a509a"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:1098912792571:android:0ccd5499835121fc",
+        "android_client_info": {
+          "package_name": "com.example.falcon.timetable"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "1098912792571-an32dah1jl7shvf19acoqvgddbipgj3u.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "com.example.falcon.timetable",
+            "certificate_hash": "15dc290629e95dcf154dbdcc0ecec8054afb06d5"
+          }
+        },
+        {
+          "client_id": "1098912792571-1lsc7t3glp81dmiabpbgsgjl4or6ovc2.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyAhSIXELoowmtns77PPZE9sb_PCNP_F0aM"
+        }
+      ],
+      "services": {
+        "analytics_service": {
+          "status": 1
+        },
+        "appinvite_service": {
+          "status": 1,
+          "other_platform_oauth_client": []
+        },
+        "ads_service": {
+          "status": 1
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}

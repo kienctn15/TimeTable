@@ -2,10 +2,7 @@ package com.example.falcon.timetable;
 
 import android.content.Intent;
 import android.content.SharedPreferences;
-import android.graphics.Color;
 import android.os.Bundle;
-import android.support.design.widget.FloatingActionButton;
-import android.support.design.widget.Snackbar;
 import android.support.v4.app.FragmentManager;
 import android.view.View;
 import android.support.design.widget.NavigationView;
@@ -18,14 +15,11 @@ import android.view.Menu;
 import android.view.MenuItem;
 import android.widget.TextView;
 
-import com.example.falcon.timetable.DanhSachCongViec.ThemCongViecFragment;
+import com.example.falcon.timetable.DongBoDuLieu.GGWP;
 import com.example.falcon.timetable.Login_Register.LoginActivity;
 import com.example.falcon.timetable.Login_Register.UserSessionManager;
 import com.example.falcon.timetable.TatCaCongViec.TatCaCongViecFragment;
-import com.github.sundeepk.compactcalendarview.CompactCalendarView;
-import com.github.sundeepk.compactcalendarview.domain.Event;
 
-import java.util.Calendar;
 import java.util.HashMap;
 
 public class MainActivity extends AppCompatActivity
@@ -128,7 +122,8 @@ public class MainActivity extends AppCompatActivity
         } else if (id == R.id.nav_caidat) {
 
         } else if (id == R.id.nav_dongbo_dulieu) {
-
+            Intent i = new Intent(MainActivity.this, GGWP.class);
+            startActivity(i);
         } else if (id == R.id.nav_manage) {
 
         } else if (id == R.id.nav_share) {
