@@ -299,13 +299,6 @@ public class ThemCongViecFragment extends Fragment {
                                                     db.insert_table_congviec_laplai(congViec);
                                                 }
                                                 Toast.makeText(getActivity(), "Lặp lịch hàng ngày thành công!", Toast.LENGTH_SHORT).show();
-                                                /*Toast.makeText(getActivity(), title.getText().toString() + "\n"
-                                                        + address.getText().toString() + "\n"
-                                                        + description.getText().toString() + "\n"
-                                                        + kll_ngay.getText().toString() + "\n"
-                                                        + kll_gio_bd.getText().toString() + "\n"
-                                                        + kll_gio_kt.getText().toString() + "\n"
-                                                        + "Lặp lại hàng ngày!", Toast.LENGTH_SHORT).show();*/
                                                 FragmentManager fragmentManager = getFragmentManager();
                                                 fragmentManager.beginTransaction().replace(R.id.content_frame, new ThoiGianBieu_Fragment())
                                                         .addToBackStack(null)
@@ -363,13 +356,6 @@ public class ThemCongViecFragment extends Fragment {
                                                         db.insert_table_congviec_laplai(congViec);
                                                     }
                                                     Toast.makeText(getActivity(), "Lặp lịch hàng tuần thành công!", Toast.LENGTH_SHORT).show();
-                                                    /*Toast.makeText(getActivity(), title.getText().toString() + "\n"
-                                                            + address.getText().toString() + "\n"
-                                                            + description.getText().toString() + "\n"
-                                                            + kll_ngay.getText().toString() + "\n"
-                                                            + kll_gio_bd.getText().toString() + "\n"
-                                                            + kll_gio_kt.getText().toString() + "\n"
-                                                            + "Lặp lại hàng tuần!", Toast.LENGTH_SHORT).show();*/
                                                     FragmentManager fragmentManager = getFragmentManager();
                                                     fragmentManager.beginTransaction().replace(R.id.content_frame, new ThoiGianBieu_Fragment())
                                                             .addToBackStack(null)
@@ -425,14 +411,7 @@ public class ThemCongViecFragment extends Fragment {
                                                             }
                                                             db.insert_table_congviec_laplai(congViec);
                                                         }
-                                                        Toast.makeText(getActivity(), "Lặp lịch hàng tháng   thành công!", Toast.LENGTH_SHORT).show();
-                                                        /*Toast.makeText(getActivity(), title.getText().toString() + "\n"
-                                                                + address.getText().toString() + "\n"
-                                                                + description.getText().toString() + "\n"
-                                                                + kll_ngay.getText().toString() + "\n"
-                                                                + kll_gio_bd.getText().toString() + "\n"
-                                                                + kll_gio_kt.getText().toString() + "\n"
-                                                                + "Lặp lại hàng tháng!", Toast.LENGTH_SHORT).show();*/
+                                                        Toast.makeText(getActivity(), "Lặp lịch hàng tháng thành công!", Toast.LENGTH_SHORT).show();
                                                         FragmentManager fragmentManager = getFragmentManager();
                                                         fragmentManager.beginTransaction().replace(R.id.content_frame, new ThoiGianBieu_Fragment())
                                                                 .addToBackStack(null)
