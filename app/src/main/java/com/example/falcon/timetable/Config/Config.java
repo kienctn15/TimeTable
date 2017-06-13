@@ -11,7 +11,7 @@ public class Config {
     public Config() {
         {
             try {
-                mSocket = IO.socket("http://192.168.137.183:3000/");
+                mSocket = IO.socket("http://192.168.102.106:3000/");
 
             } catch (Exception e) {
                 e.printStackTrace();

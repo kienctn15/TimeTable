@@ -16,6 +16,7 @@ import android.view.MenuItem;
 import android.widget.TextView;
 
 import com.example.falcon.timetable.DongBoDuLieu.GGWP;
+import com.example.falcon.timetable.DongBoDuLieu.SyncDataFragment;
 import com.example.falcon.timetable.Login_Register.LoginActivity;
 import com.example.falcon.timetable.Login_Register.UserSessionManager;
 import com.example.falcon.timetable.TatCaCongViec.TatCaCongViecFragment;
@@ -124,8 +125,14 @@ public class MainActivity extends AppCompatActivity
         } else if (id == R.id.nav_caidat) {
 
         } else if (id == R.id.nav_dongbo_dulieu) {
-            Intent i = new Intent(MainActivity.this, GGWP.class);
-            startActivity(i);
+//            Intent i = new Intent(MainActivity.this, GGWP.class);
+//            startActivity(i);
+
+            FragmentManager fragmentManager = getSupportFragmentManager();
+            fragmentManager.beginTransaction().replace(R.id.content_frame, new SyncDataFragment())
+                    .addToBackStack(null)
+                    .commit();
+
         } else if (id == R.id.nav_manage) {
 
         } else if (id == R.id.nav_share) {
