@@ -29,9 +29,8 @@
         <activity android:name=".Login_Register.LoginActivity" />
         <activity android:name=".Login_Register.RegisterActivity"></activity>
         <activity android:name=".DongBoDuLieu.GGWP"></activity>
-        <receiver android:name=".AlarmReceiver"/>
-        <service android:name=".MyAlarmService"
-            android:enabled="true" />
+
+        <receiver android:name=".AlarmNotificationReceiver" />
 
     </application>
 </manifest>

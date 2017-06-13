@@ -5,9 +5,7 @@ import android.app.DatePickerDialog;
 import android.app.PendingIntent;
 import android.app.TimePickerDialog;
 import android.content.Intent;
-import android.os.Build;
 import android.os.Bundle;
-import android.os.SystemClock;
 import android.support.annotation.Nullable;
 import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentManager;
@@ -25,7 +23,7 @@ import android.widget.TextView;
 import android.widget.TimePicker;
 import android.widget.Toast;
 
-import com.example.falcon.timetable.AlarmReceiver;
+import com.example.falcon.timetable.AlarmNotificationReceiver;
 import com.example.falcon.timetable.DBHandler.DBHandler;
 import com.example.falcon.timetable.R;
 import com.example.falcon.timetable.ThoiGianBieu_Fragment;
@@ -48,10 +46,10 @@ public class ThemCongViecFragment extends Fragment {
     RadioButton rd_kll, rd_llttuan, rd_lltthang, rd_llhangngay;
     LinearLayout layoutk, layouthn, layouttt, layouttth;
     TextView kll_ngay, kll_gio_bd, kll_gio_kt; /*ll_gio_bd, ll_gio_kt, ll_ngay, lltt_ngay, lltt_gio_bd, lltt_gio_kt, lltth_ngay, lltth_gio_bd, lltth_gio_kt;*/
+    AlarmManager alarmManager;
     private int day, month, year, dayf, monthf, yearf, hour, minute, hourf, minutef, hourf1, minutef1;
     private String strdate, strstart, strend;
     private PendingIntent pendingIntent;
-    AlarmManager alarmManager;
 
     @Nullable
     @Override
@@ -246,18 +244,27 @@ public class ThemCongViecFragment extends Fragment {
 
                                             Calendar calendar = Calendar.getInstance();
                                             calendar.set(Calendar.YEAR, yearf);
-                                            calendar.set(Calendar.MONTH, monthf);
+                                            calendar.set(Calendar.MONTH, monthf - 1);
                                             calendar.set(Calendar.DAY_OF_MONTH, dayf);
                                             calendar.set(Calendar.HOUR_OF_DAY, hourf);
                                             calendar.set(Calendar.MINUTE, minutef);
                                             calendar.set(Calendar.SECOND, 00);
                                             Log.d("TEst Alarm", "Chay ngon cmnr");
-
-                                            Intent myIntent = new Intent(getActivity(), AlarmReceiver.class);
+                                            Log.d("TEst Alarm",
+                                                    "---------------------------------------------\n" +
+                                                            "---------------------------------------------\n" +
+                                                            "---------------------------------------------\n" +
+                                                            "---------------------------------------------" + calendar.getTime());
+                                            Log.d("TEst Alarm",
+                                                    "---------------------------------------------\n" +
+                                                            "---------------------------------------------\n" +
+                                                            "---------------------------------------------\n" +
+                                                            "---------------------------------------------" + calendar.getTimeInMillis());
+                                            Intent myIntent = new Intent(getActivity(), AlarmNotificationReceiver.class);
                                             pendingIntent = PendingIntent.getBroadcast(getActivity(), 0, myIntent, 0);
 
-                                            AlarmManager alarmManager = (AlarmManager)getActivity().getSystemService(ALARM_SERVICE);
-                                            alarmManager.set(AlarmManager.RTC, calendar.getTimeInMillis(), pendingIntent);
+                                            AlarmManager alarmManager = (AlarmManager) getActivity().getSystemService(ALARM_SERVICE);
+                                            alarmManager.set(AlarmManager.RTC_WAKEUP, calendar.getTimeInMillis() - 150000, pendingIntent);
                                             Toast.makeText(getActivity(), "Lên lịch thành công!", Toast.LENGTH_SHORT).show();
 
                                             FragmentManager fragmentManager = getFragmentManager();
@@ -312,17 +319,22 @@ public class ThemCongViecFragment extends Fragment {
                                                         //handle exception
                                                     }
                                                     db.insert_table_congviec_laplai(congViec);
+
                                                     Calendar calendar = Calendar.getInstance();
                                                     calendar.set(Calendar.YEAR, yearf);
-                                                    calendar.set(Calendar.MONTH, monthf);
-                                                    calendar.set(Calendar.DAY_OF_MONTH, dayf);
+                                                    calendar.set(Calendar.MONTH, monthf - 1);
+                                                    calendar.set(Calendar.DAY_OF_MONTH, dayf + i);
                                                     calendar.set(Calendar.HOUR_OF_DAY, hourf);
                                                     calendar.set(Calendar.MINUTE, minutef);
                                                     calendar.set(Calendar.SECOND, 00);
                                                     Log.d("TEst Alarm", "Chay ngon cmnr");
-                                                    if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.KITKAT) {
-                                                        alarmManager.set(AlarmManager.RTC_WAKEUP, calendar.getTimeInMillis(), pendingIntent);
-                                                    }
+                                                    Log.d("TEst Alarm", "" + calendar.getTime());
+                                                    Log.d("TEst Alarm", "" + calendar.getTimeInMillis());
+                                                    Intent myIntent = new Intent(getActivity(), AlarmNotificationReceiver.class);
+                                                    pendingIntent = PendingIntent.getBroadcast(getActivity(), 0, myIntent, 0);
+
+                                                    AlarmManager alarmManager = (AlarmManager) getActivity().getSystemService(ALARM_SERVICE);
+                                                    alarmManager.set(AlarmManager.RTC_WAKEUP, calendar.getTimeInMillis() - 150000, pendingIntent);
                                                 }
                                                 Toast.makeText(getActivity(), "Lặp lịch hàng ngày thành công!", Toast.LENGTH_SHORT).show();
                                                 FragmentManager fragmentManager = getFragmentManager();
@@ -380,6 +392,21 @@ public class ThemCongViecFragment extends Fragment {
                                                             //handle exception
                                                         }
                                                         db.insert_table_congviec_laplai(congViec);
+                                                        Calendar calendar = Calendar.getInstance();
+                                                        calendar.set(Calendar.YEAR, yearf);
+                                                        calendar.set(Calendar.MONTH, monthf - 1);
+                                                        calendar.set(Calendar.DAY_OF_MONTH, dayf + (i*7));
+                                                        calendar.set(Calendar.HOUR_OF_DAY, hourf);
+                                                        calendar.set(Calendar.MINUTE, minutef);
+                                                        calendar.set(Calendar.SECOND, 00);
+                                                        Log.d("TEst Alarm", "Chay ngon cmnr");
+                                                        Log.d("TEst Alarm", "" + calendar.getTime());
+                                                        Log.d("TEst Alarm", "" + calendar.getTimeInMillis());
+                                                        Intent myIntent = new Intent(getActivity(), AlarmNotificationReceiver.class);
+                                                        pendingIntent = PendingIntent.getBroadcast(getActivity(), 0, myIntent, 0);
+
+                                                        AlarmManager alarmManager = (AlarmManager) getActivity().getSystemService(ALARM_SERVICE);
+                                                        alarmManager.set(AlarmManager.RTC_WAKEUP, calendar.getTimeInMillis() - 150000, pendingIntent);
                                                     }
                                                     Toast.makeText(getActivity(), "Lặp lịch hàng tuần thành công!", Toast.LENGTH_SHORT).show();
                                                     FragmentManager fragmentManager = getFragmentManager();
@@ -436,6 +463,21 @@ public class ThemCongViecFragment extends Fragment {
                                                                 //handle exception
                                                             }
                                                             db.insert_table_congviec_laplai(congViec);
+                                                            Calendar calendar = Calendar.getInstance();
+                                                            calendar.set(Calendar.YEAR, yearf);
+                                                            calendar.set(Calendar.MONTH, monthf - 1 + i);
+                                                            calendar.set(Calendar.DAY_OF_MONTH, dayf);
+                                                            calendar.set(Calendar.HOUR_OF_DAY, hourf);
+                                                            calendar.set(Calendar.MINUTE, minutef);
+                                                            calendar.set(Calendar.SECOND, 00);
+                                                            Log.d("TEst Alarm", "Chay ngon cmnr");
+                                                            Log.d("TEst Alarm", "" + calendar.getTime());
+                                                            Log.d("TEst Alarm", "" + calendar.getTimeInMillis());
+                                                            Intent myIntent = new Intent(getActivity(), AlarmNotificationReceiver.class);
+                                                            pendingIntent = PendingIntent.getBroadcast(getActivity(), 0, myIntent, 0);
+
+                                                            AlarmManager alarmManager = (AlarmManager) getActivity().getSystemService(ALARM_SERVICE);
+                                                            alarmManager.set(AlarmManager.RTC_WAKEUP, calendar.getTimeInMillis() - 150000, pendingIntent);
                                                         }
                                                         Toast.makeText(getActivity(), "Lặp lịch hàng tháng thành công!", Toast.LENGTH_SHORT).show();
                                                         FragmentManager fragmentManager = getFragmentManager();

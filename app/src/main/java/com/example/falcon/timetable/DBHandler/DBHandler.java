@@ -37,7 +37,7 @@ public class DBHandler extends SQLiteOpenHelper {
     public static final String KEY_TIME_START = "timestart";
     public static final String KEY_TIME_END = "timeend";
     public static final String KEY_NOTE = "ghichu";
-    private static final String DATABASE_NAME = "db_timetable_vnpt_3";
+    private static final String DATABASE_NAME = "db_timetable_vnpt_4";
     private static final int DATABASE_VERSION = 1;
     // Tạo bảng USER
     private static final String CREATE_TABLE_USER = " CREATE TABLE " + TABLE_NAME_USER + " ( "
