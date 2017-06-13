@@ -4,28 +4,28 @@
     <group android:checkableBehavior="single">
         <item
             android:id="@+id/nav_tatca_cac_congviec"
-            android:icon="@drawable/ic_menu_send"
+            android:icon="@drawable/ic_menu_camera"
             android:title="Tất cả các công việc" />
         <item
             android:id="@+id/nav_caidat"
             android:icon="@drawable/ic_menu_gallery"
             android:title="Cài đặt"
-            android:visible="false" />
+             />
         <item
             android:id="@+id/nav_dongbo_dulieu"
             android:icon="@drawable/ic_menu_slideshow"
             android:title="Đồng bộ dữ liệu"
-            android:visible="false" />
+             />
         <item
             android:id="@+id/nav_manage"
             android:icon="@drawable/ic_menu_manage"
             android:title="Tools"
-            android:visible="false" />
+             />
     </group>
 
     <item
         android:title="Communicate"
-        android:visible="false">
+        >
         <menu>
             <item
                 android:id="@+id/nav_share"
