@@ -64,7 +64,7 @@ public class ChiTietCongViecFragment extends Fragment {
             tv_chitiet_congviec_title.setText(bundle.getString("title"));
             tv_chitiet_congviec_address.setText(bundle.getString("address"));
             tv_chitiet_congviec_date.setText(bundle.getString("date"));
-            tv_chitiet_congviec_time_start.setText(bundle.getString("time_start") + " - ");
+            tv_chitiet_congviec_time_start.setText(bundle.getString("time_start"));
             tv_chitiet_congviec_time_end.setText(bundle.getString("time_end"));
             tv_chitiet_congviec_note.setText(bundle.getString("description"));
 

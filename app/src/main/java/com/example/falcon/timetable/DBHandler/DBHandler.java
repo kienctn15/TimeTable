@@ -227,6 +227,15 @@ public class DBHandler extends SQLiteOpenHelper {
         close();
     }
 
+    public boolean check_congviec(CongViec congViec){
+        open();
+        String selection = KEY_ID_CONGVIEC + " = ?" + " AND " + KEY_TITLE + " = ?";
+        Cursor cursor = db.query(TABLE_NAME_CONGVIEC,null,selection,new String[]{String.valueOf(congViec.getId()),congViec.getTitle()},null,null,null);
+        if(cursor.getCount()>0)
+            return true;
+        return false;
+    }
+
     public List<CongViec> get_all_congviec() {
         open();
         List<CongViec> list = new ArrayList<>();

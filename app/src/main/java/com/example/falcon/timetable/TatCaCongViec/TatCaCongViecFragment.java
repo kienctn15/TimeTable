@@ -38,7 +38,7 @@ public class TatCaCongViecFragment extends Fragment {
     public View onCreateView(LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
         myView = inflater.inflate(R.layout.fragment_tat_ca_cong_viec, container, false);
         recyclerView = (RecyclerView) myView.findViewById(R.id.recyclerview_tatcacongviec);
-        recyclerView.setHasFixedSize(true);
+      
         db = new DBHandler(getContext());
 
         HienThiTatCaCongViec();
