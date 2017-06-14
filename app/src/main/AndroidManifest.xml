@@ -5,6 +5,7 @@
     <uses-permission android:name="android.permission.INTERNET" />
     <uses-sdk android:minSdkVersion="19" />
     <uses-permission android:name="android.permission.WAKE_LOCK"></uses-permission>
+    <uses-permission android:name="android.permission.RECEIVE_BOOT_COMPLETED" />
 
     <application
         android:name=".EnableMultiDex"
@@ -30,7 +31,12 @@
         <activity android:name=".Login_Register.RegisterActivity"></activity>
         <activity android:name=".DongBoDuLieu.GGWP"></activity>
 
-        <receiver android:name=".AlarmNotificationReceiver" />
+        <receiver android:name=".AlarmNotificationReceiver" >
+            <intent-filter>
+                <action android:name="android.net.wifi.WIFI_STATE_CHANGED"/>
+                <action android:name="android.intent.action.BOOT_COMPLETED" />
+            </intent-filter>
+        </receiver>
 
     </application>
 </manifest>
