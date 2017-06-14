@@ -11,10 +11,6 @@ import android.widget.Toast;
 import com.example.falcon.timetable.DanhSachCongViec.CongViec;
 import com.example.falcon.timetable.Login_Register.User;
 
-import java.sql.Date;
-import java.sql.Time;
-import java.text.ParseException;
-import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -27,42 +23,30 @@ public class DBHandler extends SQLiteOpenHelper {
     // insert sql date : dd/MM/yyyy
     // time : HH:mm:ss
 
-    private static final String DATABASE_NAME="db_timetable_vnpt_3";
-    private static final int DATABASE_VERSION=1;
-
-
-
     // Bảng USER
-    public static final String KEY_ID_USER="id";
-    public static final String TABLE_NAME_USER="tbl_user";
+    public static final String KEY_ID_USER = "id";
+    public static final String TABLE_NAME_USER = "tbl_user";
     public static final String KEY_USERNAME = "username";
-    public static final String KEY_PASSWORD="password";
-
-
+    public static final String KEY_PASSWORD = "password";
     // Bảng Công việc
-    public static final String TABLE_NAME_CONGVIEC="tbl_congviec";
-    public static final String KEY_ID_CONGVIEC="id";
+    public static final String TABLE_NAME_CONGVIEC = "tbl_congviec";
+    public static final String KEY_ID_CONGVIEC = "id";
     public static final String KEY_TITLE = "title";
-    public static final String KEY_ADDRESS="address";
-    public static final String KEY_DATE="date";
-    public static final String KEY_TIME_START="timestart";
-    public static final String KEY_TIME_END="timeend";
-    public static final String KEY_NOTE="ghichu";
-
-    Context context;
-    SQLiteDatabase db;
-
-
+    public static final String KEY_ADDRESS = "address";
+    public static final String KEY_DATE = "date";
+    public static final String KEY_TIME_START = "timestart";
+    public static final String KEY_TIME_END = "timeend";
+    public static final String KEY_NOTE = "ghichu";
+    private static final String DATABASE_NAME = "db_timetable_vnpt_4";
+    private static final int DATABASE_VERSION = 1;
     // Tạo bảng USER
-    private static final String CREATE_TABLE_USER=" CREATE TABLE " + TABLE_NAME_USER + " ( "
+    private static final String CREATE_TABLE_USER = " CREATE TABLE " + TABLE_NAME_USER + " ( "
             + KEY_ID_USER + " INTEGER PRIMARY KEY AUTOINCREMENT, "
             + KEY_USERNAME + " TEXT , "
             + KEY_PASSWORD + " TEXT )";
-
-    private static final String DROP_TABLE_USER="DROP TABLE IF EXISTS "+ TABLE_NAME_USER;
-
+    private static final String DROP_TABLE_USER = "DROP TABLE IF EXISTS " + TABLE_NAME_USER;
     // Tạo bảng Công Việc
-    private static final String CREATE_TABLE_CONGVIEC=" CREATE TABLE " + TABLE_NAME_CONGVIEC+ " ( "
+    private static final String CREATE_TABLE_CONGVIEC = " CREATE TABLE " + TABLE_NAME_CONGVIEC + " ( "
             + KEY_ID_CONGVIEC + " INTEGER PRIMARY KEY AUTOINCREMENT, "
             + KEY_TITLE + " TEXT , "
             + KEY_ADDRESS + " TEXT , "
@@ -70,11 +54,13 @@ public class DBHandler extends SQLiteOpenHelper {
             + KEY_TIME_START + " TEXT , "
             + KEY_TIME_END + " TEXT , "
             + KEY_NOTE + " TEXT )";
-    private static final String DROP_TABLE_CONGVIEC="DROP TABLE IF EXISTS "+ TABLE_NAME_CONGVIEC;
+    private static final String DROP_TABLE_CONGVIEC = "DROP TABLE IF EXISTS " + TABLE_NAME_CONGVIEC;
+    Context context;
+    SQLiteDatabase db;
 
     public DBHandler(Context context) {
-        super(context,DATABASE_NAME , null, DATABASE_VERSION);
-        this.context=context;
+        super(context, DATABASE_NAME, null, DATABASE_VERSION);
+        this.context = context;
     }
 
     @Override
@@ -110,119 +96,112 @@ public class DBHandler extends SQLiteOpenHelper {
 
 
     // TABLE USER
-    public void insert_table_user(User user){
+    public void insert_table_user(User user) {
         open();
-        ContentValues values=new ContentValues();
-        values.put(KEY_USERNAME,user.getUsername());
-        values.put(KEY_PASSWORD,user.getPassword());
+        ContentValues values = new ContentValues();
+        values.put(KEY_USERNAME, user.getUsername());
+        values.put(KEY_PASSWORD, user.getPassword());
 
 
-        if(db.insert(TABLE_NAME_USER,null,values)!=-1){
-              Toast.makeText(context,"Thêm Thành Công!" ,Toast.LENGTH_SHORT).show();
+        if (db.insert(TABLE_NAME_USER, null, values) != -1) {
+            Toast.makeText(context, "Thêm Thành Công!", Toast.LENGTH_SHORT).show();
 
-        }else{
-              Toast.makeText(context,"Thêm Thất Bại!",Toast.LENGTH_SHORT).show();
+        } else {
+            Toast.makeText(context, "Thêm Thất Bại!", Toast.LENGTH_SHORT).show();
         }
 
         close();
     }
 
-    public boolean check_login(String username, String password){
+    public boolean check_login(String username, String password) {
         open();
         String selection = KEY_USERNAME + " = ?" + " AND " + KEY_PASSWORD + " = ?";
-        Cursor cursor = db.query(TABLE_NAME_USER,null,selection,new String[]{username,password},null,null,null);
-        if(cursor.getCount()>0)
+        Cursor cursor = db.query(TABLE_NAME_USER, null, selection, new String[]{username, password}, null, null, null);
+        if (cursor.getCount() > 0)
             return true;
         return false;
 
     }
 
-    public boolean check_register(String username){
+    public boolean check_register(String username) {
         open();
-        Cursor cursor = db.query(TABLE_NAME_USER,null,KEY_USERNAME + " =? ",new String[]{username},null,null,null);
-        if(cursor.getCount()>0)
+        Cursor cursor = db.query(TABLE_NAME_USER, null, KEY_USERNAME + " =? ", new String[]{username}, null, null, null);
+        if (cursor.getCount() > 0)
             return false;
         return true;
     }
 
-    public void delete_user(String username){
+    public void delete_user(String username) {
         open();
-        if(db.delete(TABLE_NAME_USER,KEY_USERNAME+ " =? ",new String[]{username})!=-1){
-            Toast.makeText(context,"Xóa Thành Công " + TABLE_NAME_USER,Toast.LENGTH_SHORT).show();
-        }else{
-            Toast.makeText(context,"Xóa Thất Bại " + TABLE_NAME_USER,Toast.LENGTH_SHORT).show();
+        if (db.delete(TABLE_NAME_USER, KEY_USERNAME + " =? ", new String[]{username}) != -1) {
+            Toast.makeText(context, "Xóa Thành Công " + TABLE_NAME_USER, Toast.LENGTH_SHORT).show();
+        } else {
+            Toast.makeText(context, "Xóa Thất Bại " + TABLE_NAME_USER, Toast.LENGTH_SHORT).show();
         }
         close();
     }
 
     // xoa ca bang user
-    public void delete_table_user(){
+    public void delete_table_user() {
         open();
-        if(db.delete(TABLE_NAME_USER,null,null)!=-1){
-             Toast.makeText(context,"Xóa Thành Công " + TABLE_NAME_USER,Toast.LENGTH_SHORT).show();
-        }else{
-              Toast.makeText(context,"Xóa Thất Bại " + TABLE_NAME_USER,Toast.LENGTH_SHORT).show();
+        if (db.delete(TABLE_NAME_USER, null, null) != -1) {
+            Toast.makeText(context, "Xóa Thành Công " + TABLE_NAME_USER, Toast.LENGTH_SHORT).show();
+        } else {
+            Toast.makeText(context, "Xóa Thất Bại " + TABLE_NAME_USER, Toast.LENGTH_SHORT).show();
         }
         close();
     }
 
 
     // TABLE CONG VIEC
-    public void insert_table_congviec(CongViec congViec){
+    public void insert_table_congviec(CongViec congViec) {
         open();
-        ContentValues values=new ContentValues();
-        values.put(KEY_TITLE,congViec.getTitle());
-        values.put(KEY_ADDRESS,congViec.getAddress());
-        values.put(KEY_DATE,congViec.getDate());
-        values.put(KEY_TIME_START,congViec.getTime_start());
-        values.put(KEY_TIME_END,congViec.getTime_end());
-        values.put(KEY_NOTE,congViec.getNote());
-        db.insert(TABLE_NAME_CONGVIEC,null,values);
-        if(db.insert(TABLE_NAME_CONGVIEC,null,values)!=-1){
-            Toast.makeText(context,"Thêm Thành Công!" ,Toast.LENGTH_SHORT).show();
+        ContentValues values = new ContentValues();
+        values.put(KEY_TITLE, congViec.getTitle());
+        values.put(KEY_ADDRESS, congViec.getAddress());
+        values.put(KEY_DATE, congViec.getDate());
+        values.put(KEY_TIME_START, congViec.getTime_start());
+        values.put(KEY_TIME_END, congViec.getTime_end());
+        values.put(KEY_NOTE, congViec.getNote());
+        db.insert(TABLE_NAME_CONGVIEC, null, values);
+        close();
+    }
 
-        }else{
-            Toast.makeText(context,"Thêm Thất Bại!",Toast.LENGTH_SHORT).show();
+    public void insert_table_congviec_laplai(CongViec congViec) {
+        open();
+        ContentValues values = new ContentValues();
+        values.put(KEY_TITLE, congViec.getTitle());
+        values.put(KEY_ADDRESS, congViec.getAddress());
+        values.put(KEY_DATE, congViec.getDate());
+        values.put(KEY_TIME_START, congViec.getTime_start());
+        values.put(KEY_TIME_END, congViec.getTime_end());
+        values.put(KEY_NOTE, congViec.getNote());
+        db.insert(TABLE_NAME_CONGVIEC, null, values);
+        close();
+    }
+
+    public void update_congviec(CongViec congViec) {
+        open();
+        ContentValues values = new ContentValues();
+        values.put(KEY_TITLE, congViec.getTitle());
+        values.put(KEY_ADDRESS, congViec.getAddress());
+        values.put(KEY_DATE, congViec.getDate());
+        values.put(KEY_TIME_START, congViec.getTime_start());
+        values.put(KEY_TIME_END, congViec.getTime_end());
+        values.put(KEY_NOTE, congViec.getNote());
+        if (db.update(TABLE_NAME_CONGVIEC, values, KEY_ID_CONGVIEC + " =? ", new String[]{String.valueOf(congViec.getId())}) != -1) {
+            Toast.makeText(context, "Sửa thành công", Toast.LENGTH_SHORT).show();
+        } else {
+            Toast.makeText(context, "Sửa thất bại", Toast.LENGTH_SHORT).show();
         }
-
-        close();
     }
 
-    public void insert_table_congviec_laplai(CongViec congViec){
+    public void delete_congviec(int id) {
         open();
-        ContentValues values=new ContentValues();
-        values.put(KEY_TITLE,congViec.getTitle());
-        values.put(KEY_ADDRESS,congViec.getAddress());
-        values.put(KEY_DATE,congViec.getDate());
-        values.put(KEY_TIME_START,congViec.getTime_start());
-        values.put(KEY_TIME_END,congViec.getTime_end());
-        values.put(KEY_NOTE,congViec.getNote());
-        db.insert(TABLE_NAME_CONGVIEC,null,values);
-        close();
-    }
-
-    public void update_congviec(CongViec congViec){
-        open();
-        ContentValues values=new ContentValues();
-        values.put(KEY_TITLE,congViec.getTitle());
-        values.put(KEY_ADDRESS,congViec.getAddress());
-        values.put(KEY_DATE,congViec.getDate());
-        values.put(KEY_TIME_START,congViec.getTime_start());
-        values.put(KEY_TIME_END,congViec.getTime_end());
-        values.put(KEY_NOTE,congViec.getNote());
-       if( db.update(TABLE_NAME_CONGVIEC,values,KEY_ID_CONGVIEC +" =? ",new String[]{String.valueOf(congViec.getId())})!=-1){
-           Toast.makeText(context, "Sửa thành công", Toast.LENGTH_SHORT).show();
-       }else{
-           Toast.makeText(context, "Sửa thất bại", Toast.LENGTH_SHORT).show();
-       }
-    }
-
-    public void delete_congviec(int id){
-        open();
-        if(db.delete(TABLE_NAME_CONGVIEC,KEY_ID_CONGVIEC + " =? ",new String[]{String.valueOf(id)})!=-1){
-            Toast.makeText(context,"Xóa Thành Công " ,Toast.LENGTH_SHORT).show();
-        }else{
-            Toast.makeText(context,"Xóa Thất Bại " ,Toast.LENGTH_SHORT).show();
+        if (db.delete(TABLE_NAME_CONGVIEC, KEY_ID_CONGVIEC + " =? ", new String[]{String.valueOf(id)}) != -1) {
+            Toast.makeText(context, "Xóa Thành Công ", Toast.LENGTH_SHORT).show();
+        } else {
+            Toast.makeText(context, "Xóa Thất Bại ", Toast.LENGTH_SHORT).show();
         }
         close();
     }
@@ -239,11 +218,11 @@ public class DBHandler extends SQLiteOpenHelper {
     public List<CongViec> get_all_congviec() {
         open();
         List<CongViec> list = new ArrayList<>();
-        String[] cols = new String[]{KEY_ID_CONGVIEC, KEY_TITLE, KEY_ADDRESS,KEY_DATE,KEY_TIME_START,KEY_TIME_END,KEY_NOTE};
-        Cursor cursor = db.query(TABLE_NAME_CONGVIEC,cols,null,null,null,null,null);
-        if(cursor!=null){
+        String[] cols = new String[]{KEY_ID_CONGVIEC, KEY_TITLE, KEY_ADDRESS, KEY_DATE, KEY_TIME_START, KEY_TIME_END, KEY_NOTE};
+        Cursor cursor = db.query(TABLE_NAME_CONGVIEC, cols, null, null, null, null, null);
+        if (cursor != null) {
             cursor.moveToFirst();
-            while (!cursor.isAfterLast()){
+            while (!cursor.isAfterLast()) {
                 CongViec congViec = new CongViec();
                 congViec.setId(Integer.parseInt(cursor.getString(cursor.getColumnIndex(KEY_ID_CONGVIEC))));
                 congViec.setTitle(cursor.getString(cursor.getColumnIndex(KEY_TITLE)));
@@ -257,8 +236,7 @@ public class DBHandler extends SQLiteOpenHelper {
                 cursor.moveToNext();
             }
             close();
-        }
-        else{
+        } else {
             Toast.makeText(context, "DB Empty!", Toast.LENGTH_SHORT).show();
         }
         return list;

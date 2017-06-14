@@ -1,11 +1,15 @@
 package com.example.falcon.timetable.DanhSachCongViec;
 
+import android.app.AlarmManager;
 import android.app.DatePickerDialog;
+import android.app.PendingIntent;
 import android.app.TimePickerDialog;
+import android.content.Intent;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentManager;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -19,6 +23,7 @@ import android.widget.TextView;
 import android.widget.TimePicker;
 import android.widget.Toast;
 
+import com.example.falcon.timetable.AlarmNotificationReceiver;
 import com.example.falcon.timetable.DBHandler.DBHandler;
 import com.example.falcon.timetable.R;
 import com.example.falcon.timetable.ThoiGianBieu_Fragment;
@@ -27,6 +32,8 @@ import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.Calendar;
 import java.util.Date;
+
+import static android.content.Context.ALARM_SERVICE;
 
 
 public class ThemCongViecFragment extends Fragment {
@@ -39,8 +46,10 @@ public class ThemCongViecFragment extends Fragment {
     RadioButton rd_kll, rd_llttuan, rd_lltthang, rd_llhangngay;
     LinearLayout layoutk, layouthn, layouttt, layouttth;
     TextView kll_ngay, kll_gio_bd, kll_gio_kt; /*ll_gio_bd, ll_gio_kt, ll_ngay, lltt_ngay, lltt_gio_bd, lltt_gio_kt, lltth_ngay, lltth_gio_bd, lltth_gio_kt;*/
-    private int day, month, year, dayf, monthf, yearf, hour, minute, hourf, minutef;
+    AlarmManager alarmManager;
+    private int day, month, year, dayf, monthf, yearf, hour, minute, hourf, minutef, hourf1, minutef1;
     private String strdate, strstart, strend;
+    private PendingIntent pendingIntent;
 
     @Nullable
     @Override
@@ -67,6 +76,9 @@ public class ThemCongViecFragment extends Fragment {
         kll_gio_bd = (TextView) myView.findViewById(R.id.tv_kll_chongio_batdau);
         kll_gio_kt = (TextView) myView.findViewById(R.id.tv_kll_chongio_dukienkt);
 
+
+
+
         /*layoutk.setVisibility(View.INVISIBLE);
         layouttth.setVisibility(View.INVISIBLE);
         layouttt.setVisibility(View.INVISIBLE);
@@ -80,7 +92,6 @@ public class ThemCongViecFragment extends Fragment {
 
                 View radioButton = radioGroup.findViewById(checkedId);
                 int index = radioGroup.indexOfChild(radioButton);
-
                 // Add logic here
                 FragmentManager fragmentManager = getFragmentManager();
                 switch (index) {
@@ -114,18 +125,18 @@ public class ThemCongViecFragment extends Fragment {
                                                     dayf = dayOfMonth;
                                                     if (monthf > 9) {
                                                         if (dayf > 9) {
-                                                            kll_ngay.setText(dayf + " - " + monthf + " - " + yearf);
+                                                            kll_ngay.setText(dayf + "/" + monthf + "/" + yearf);
                                                             strdate = dayf + "/" + monthf + "/" + yearf;
                                                         } else {
-                                                            kll_ngay.setText("0" + dayf + " - " + monthf + " - " + yearf);
+                                                            kll_ngay.setText("0" + dayf + "/" + monthf + "/" + yearf);
                                                             strdate = "0" + dayf + "/" + monthf + "/" + yearf;
                                                         }
                                                     } else {
                                                         if (dayf > 9) {
-                                                            kll_ngay.setText(dayf + " - " + "0" + monthf + " - " + yearf);
+                                                            kll_ngay.setText(dayf + "/" + "0" + monthf + "/" + yearf);
                                                             strdate = "0" + dayf + "/0" + monthf + "/" + yearf;
                                                         } else {
-                                                            kll_ngay.setText("0" + dayf + " - " + "0" + monthf + " - " + yearf);
+                                                            kll_ngay.setText("0" + dayf + "/" + "0" + monthf + "/" + yearf);
                                                             strdate = "0" + dayf + "/0" + monthf + "/" + yearf;
                                                         }
 
@@ -176,23 +187,23 @@ public class ThemCongViecFragment extends Fragment {
                 minute = c.get(Calendar.MINUTE);
                 TimePickerDialog timePickerDialog = new TimePickerDialog(getActivity(), new TimePickerDialog.OnTimeSetListener() {
                     public void onTimeSet(TimePicker view, int hourOfDay, int minute) {
-                        hourf = hourOfDay;
-                        minutef = minute;
-                        if (minutef > 9) {
-                            if (hourf > 9) {
-                                kll_gio_kt.setText(hourf + ":" + minutef);
-                                strend = hourf + ":" + minutef + ":00";
+                        hourf1 = hourOfDay;
+                        minutef1 = minute;
+                        if (minutef1 > 9) {
+                            if (hourf1 > 9) {
+                                kll_gio_kt.setText(hourf1 + ":" + minutef1);
+                                strend = hourf1 + ":" + minutef1 + ":00";
                             } else {
-                                kll_gio_kt.setText("0" + hourf + ":" + minutef);
-                                strend = "0" + hourf + ":" + minutef + ":00";
+                                kll_gio_kt.setText("0" + hourf1 + ":" + minutef1);
+                                strend = "0" + hourf1 + ":" + minutef1 + ":00";
                             }
                         } else {
-                            if (hourf > 9) {
-                                kll_gio_kt.setText(hourf + ":0" + minutef);
-                                strend = hourf + ":0" + minutef + ":00";
+                            if (hourf1 > 9) {
+                                kll_gio_kt.setText(hourf1 + ":0" + minutef1);
+                                strend = hourf1 + ":0" + minutef1 + ":00";
                             } else {
-                                kll_gio_kt.setText("0" + hourf + ":0" + minutef);
-                                strend = "0" + hourf + ":0" + minutef + ":00";
+                                kll_gio_kt.setText("0" + hourf1 + ":0" + minutef1);
+                                strend = "0" + hourf1 + ":0" + minutef1 + ":00";
                             }
                         }
                     }
@@ -222,14 +233,6 @@ public class ThemCongViecFragment extends Fragment {
                                         if (TimeValidator(kll_gio_bd.getText().toString(), kll_gio_kt.getText().toString()) == false) {
                                             Toast.makeText(getActivity(), "Vui lòng chọn giờ dự kiến kết thúc LỚN HƠN giờ bắt đầu!", Toast.LENGTH_SHORT).show();
                                         } else {
-                                            /*Toast.makeText(getActivity(), title.getText().toString() + "\n"
-                                                    + address.getText().toString() + "\n"
-                                                    + description.getText().toString() + "\n"
-                                                    + kll_ngay.getText().toString() + "\n"
-                                                    + kll_gio_bd.getText().toString() + "\n"
-                                                    + kll_gio_kt.getText().toString() + "\n"
-                                                    + "Không lặp lại!", Toast.LENGTH_SHORT).show();*/
-
                                             CongViec congViec = new CongViec();
                                             congViec.setTitle(title.getText().toString());
                                             congViec.setAddress(address.getText().toString());
@@ -237,16 +240,37 @@ public class ThemCongViecFragment extends Fragment {
                                             congViec.setTime_start(kll_gio_bd.getText().toString());
                                             congViec.setTime_end(kll_gio_kt.getText().toString());
                                             congViec.setNote(description.getText().toString());
-                                            db.insert_table_congviec(congViec);
-                                            /*List<CongViec> list = new ArrayList<>();
-                                            list = db.get_all_congviec();
-                                            Toast.makeText(getActivity(), list.size() + "", Toast.LENGTH_SHORT).show();*/
+                                            db.insert_table_congviec_laplai(congViec);
+
+                                            Calendar calendar = Calendar.getInstance();
+                                            calendar.set(Calendar.YEAR, yearf);
+                                            calendar.set(Calendar.MONTH, monthf - 1);
+                                            calendar.set(Calendar.DAY_OF_MONTH, dayf);
+                                            calendar.set(Calendar.HOUR_OF_DAY, hourf);
+                                            calendar.set(Calendar.MINUTE, minutef);
+                                            calendar.set(Calendar.SECOND, 00);
+                                            Log.d("TEst Alarm", "Chay ngon cmnr");
+                                            Log.d("TEst Alarm",
+                                                    "---------------------------------------------\n" +
+                                                            "---------------------------------------------\n" +
+                                                            "---------------------------------------------\n" +
+                                                            "---------------------------------------------" + calendar.getTime());
+                                            Log.d("TEst Alarm",
+                                                    "---------------------------------------------\n" +
+                                                            "---------------------------------------------\n" +
+                                                            "---------------------------------------------\n" +
+                                                            "---------------------------------------------" + calendar.getTimeInMillis());
+                                            Intent myIntent = new Intent(getActivity(), AlarmNotificationReceiver.class);
+                                            pendingIntent = PendingIntent.getBroadcast(getActivity(), 0, myIntent, 0);
+
+                                            AlarmManager alarmManager = (AlarmManager) getActivity().getSystemService(ALARM_SERVICE);
+                                            alarmManager.set(AlarmManager.RTC_WAKEUP, calendar.getTimeInMillis() - 150000, pendingIntent);
+                                            Toast.makeText(getActivity(), "Lên lịch thành công!", Toast.LENGTH_SHORT).show();
+
                                             FragmentManager fragmentManager = getFragmentManager();
                                             fragmentManager.beginTransaction().replace(R.id.content_frame, new ThoiGianBieu_Fragment())
                                                     .addToBackStack(null)
                                                     .commit();
-
-
                                         }
                                     }
                                 }
@@ -273,7 +297,6 @@ public class ThemCongViecFragment extends Fragment {
                                             if (TimeValidator(kll_gio_bd.getText().toString(), kll_gio_kt.getText().toString()) == false) {
                                                 Toast.makeText(getActivity(), "Vui lòng chọn giờ dự kiến kết thúc LỚN HƠN giờ bắt đầu!", Toast.LENGTH_SHORT).show();
                                             } else {
-
                                                 CongViec congViec = new CongViec();
                                                 congViec.setTitle(title.getText().toString());
                                                 congViec.setAddress(address.getText().toString());
@@ -281,7 +304,6 @@ public class ThemCongViecFragment extends Fragment {
                                                 congViec.setTime_start(kll_gio_bd.getText().toString());
                                                 congViec.setTime_end(kll_gio_kt.getText().toString());
                                                 congViec.setNote(description.getText().toString());
-
                                                 for (int i = 0; i < 30; i++) {
                                                     SimpleDateFormat dateParser = new SimpleDateFormat("dd/MM/yyyy");
                                                     try {
@@ -297,6 +319,22 @@ public class ThemCongViecFragment extends Fragment {
                                                         //handle exception
                                                     }
                                                     db.insert_table_congviec_laplai(congViec);
+
+                                                    Calendar calendar = Calendar.getInstance();
+                                                    calendar.set(Calendar.YEAR, yearf);
+                                                    calendar.set(Calendar.MONTH, monthf - 1);
+                                                    calendar.set(Calendar.DAY_OF_MONTH, dayf + i);
+                                                    calendar.set(Calendar.HOUR_OF_DAY, hourf);
+                                                    calendar.set(Calendar.MINUTE, minutef);
+                                                    calendar.set(Calendar.SECOND, 00);
+                                                    Log.d("TEst Alarm", "Chay ngon cmnr");
+                                                    Log.d("TEst Alarm", "" + calendar.getTime());
+                                                    Log.d("TEst Alarm", "" + calendar.getTimeInMillis());
+                                                    Intent myIntent = new Intent(getActivity(), AlarmNotificationReceiver.class);
+                                                    pendingIntent = PendingIntent.getBroadcast(getActivity(), 0, myIntent, 0);
+
+                                                    AlarmManager alarmManager = (AlarmManager) getActivity().getSystemService(ALARM_SERVICE);
+                                                    alarmManager.set(AlarmManager.RTC_WAKEUP, calendar.getTimeInMillis() - 150000, pendingIntent);
                                                 }
                                                 Toast.makeText(getActivity(), "Lặp lịch hàng ngày thành công!", Toast.LENGTH_SHORT).show();
                                                 FragmentManager fragmentManager = getFragmentManager();
@@ -344,7 +382,7 @@ public class ThemCongViecFragment extends Fragment {
                                                             Date myDate = dateParser.parse(strdate);
                                                             Calendar c = Calendar.getInstance();
                                                             c.setTime(myDate);
-                                                            c.add(Calendar.DAY_OF_YEAR, i * 7);
+                                                            c.add(Calendar.DAY_OF_YEAR, (i * 7));
                                                             Date newDate = c.getTime();
                                                             String newFormattedDate = dateParser.format(newDate);
                                                             congViec.setDate(newFormattedDate);
@@ -354,6 +392,21 @@ public class ThemCongViecFragment extends Fragment {
                                                             //handle exception
                                                         }
                                                         db.insert_table_congviec_laplai(congViec);
+                                                        Calendar calendar = Calendar.getInstance();
+                                                        calendar.set(Calendar.YEAR, yearf);
+                                                        calendar.set(Calendar.MONTH, monthf - 1);
+                                                        calendar.set(Calendar.DAY_OF_MONTH, dayf + (i*7));
+                                                        calendar.set(Calendar.HOUR_OF_DAY, hourf);
+                                                        calendar.set(Calendar.MINUTE, minutef);
+                                                        calendar.set(Calendar.SECOND, 00);
+                                                        Log.d("TEst Alarm", "Chay ngon cmnr");
+                                                        Log.d("TEst Alarm", "" + calendar.getTime());
+                                                        Log.d("TEst Alarm", "" + calendar.getTimeInMillis());
+                                                        Intent myIntent = new Intent(getActivity(), AlarmNotificationReceiver.class);
+                                                        pendingIntent = PendingIntent.getBroadcast(getActivity(), 0, myIntent, 0);
+
+                                                        AlarmManager alarmManager = (AlarmManager) getActivity().getSystemService(ALARM_SERVICE);
+                                                        alarmManager.set(AlarmManager.RTC_WAKEUP, calendar.getTimeInMillis() - 150000, pendingIntent);
                                                     }
                                                     Toast.makeText(getActivity(), "Lặp lịch hàng tuần thành công!", Toast.LENGTH_SHORT).show();
                                                     FragmentManager fragmentManager = getFragmentManager();
@@ -410,6 +463,21 @@ public class ThemCongViecFragment extends Fragment {
                                                                 //handle exception
                                                             }
                                                             db.insert_table_congviec_laplai(congViec);
+                                                            Calendar calendar = Calendar.getInstance();
+                                                            calendar.set(Calendar.YEAR, yearf);
+                                                            calendar.set(Calendar.MONTH, monthf - 1 + i);
+                                                            calendar.set(Calendar.DAY_OF_MONTH, dayf);
+                                                            calendar.set(Calendar.HOUR_OF_DAY, hourf);
+                                                            calendar.set(Calendar.MINUTE, minutef);
+                                                            calendar.set(Calendar.SECOND, 00);
+                                                            Log.d("TEst Alarm", "Chay ngon cmnr");
+                                                            Log.d("TEst Alarm", "" + calendar.getTime());
+                                                            Log.d("TEst Alarm", "" + calendar.getTimeInMillis());
+                                                            Intent myIntent = new Intent(getActivity(), AlarmNotificationReceiver.class);
+                                                            pendingIntent = PendingIntent.getBroadcast(getActivity(), 0, myIntent, 0);
+
+                                                            AlarmManager alarmManager = (AlarmManager) getActivity().getSystemService(ALARM_SERVICE);
+                                                            alarmManager.set(AlarmManager.RTC_WAKEUP, calendar.getTimeInMillis() - 150000, pendingIntent);
                                                         }
                                                         Toast.makeText(getActivity(), "Lặp lịch hàng tháng thành công!", Toast.LENGTH_SHORT).show();
                                                         FragmentManager fragmentManager = getFragmentManager();
