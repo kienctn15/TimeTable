@@ -33,7 +33,6 @@
 
         <receiver android:name=".AlarmNotificationReceiver" >
             <intent-filter>
-                <action android:name="android.net.wifi.WIFI_STATE_CHANGED"/>
                 <action android:name="android.intent.action.BOOT_COMPLETED" />
             </intent-filter>
         </receiver>

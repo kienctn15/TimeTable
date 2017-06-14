@@ -258,7 +258,7 @@ public class ThemCongViecFragment extends Fragment {
                                             pendingIntent = PendingIntent.getBroadcast(getActivity(), 0, myIntent, 0);
 
                                             AlarmManager alarmManager = (AlarmManager) getActivity().getSystemService(ALARM_SERVICE);
-                                            alarmManager.set(AlarmManager.RTC_WAKEUP, calendar.getTimeInMillis() - 150000, pendingIntent);
+                                            alarmManager.set(AlarmManager.RTC_WAKEUP, calendar.getTimeInMillis(), pendingIntent);
                                             Toast.makeText(getActivity(), "Lên lịch thành công!", Toast.LENGTH_SHORT).show();
 
                                             FragmentManager fragmentManager = getFragmentManager();
@@ -328,7 +328,7 @@ public class ThemCongViecFragment extends Fragment {
                                                     pendingIntent = PendingIntent.getBroadcast(getActivity(), 0, myIntent, 0);
 
                                                     AlarmManager alarmManager = (AlarmManager) getActivity().getSystemService(ALARM_SERVICE);
-                                                    alarmManager.set(AlarmManager.RTC_WAKEUP, calendar.getTimeInMillis() - 150000, pendingIntent);
+                                                    alarmManager.set(AlarmManager.RTC_WAKEUP, calendar.getTimeInMillis(), pendingIntent);
                                                 }
                                                 Toast.makeText(getActivity(), "Lặp lịch hàng ngày thành công!", Toast.LENGTH_SHORT).show();
                                                 FragmentManager fragmentManager = getFragmentManager();
@@ -400,7 +400,7 @@ public class ThemCongViecFragment extends Fragment {
                                                         pendingIntent = PendingIntent.getBroadcast(getActivity(), 0, myIntent, 0);
 
                                                         AlarmManager alarmManager = (AlarmManager) getActivity().getSystemService(ALARM_SERVICE);
-                                                        alarmManager.set(AlarmManager.RTC_WAKEUP, calendar.getTimeInMillis() - 150000, pendingIntent);
+                                                        alarmManager.set(AlarmManager.RTC_WAKEUP, calendar.getTimeInMillis(), pendingIntent);
                                                     }
                                                     Toast.makeText(getActivity(), "Lặp lịch hàng tuần thành công!", Toast.LENGTH_SHORT).show();
                                                     FragmentManager fragmentManager = getFragmentManager();
@@ -471,7 +471,7 @@ public class ThemCongViecFragment extends Fragment {
                                                             pendingIntent = PendingIntent.getBroadcast(getActivity(), 0, myIntent, 0);
 
                                                             AlarmManager alarmManager = (AlarmManager) getActivity().getSystemService(ALARM_SERVICE);
-                                                            alarmManager.set(AlarmManager.RTC_WAKEUP, calendar.getTimeInMillis() - 150000, pendingIntent);
+                                                            alarmManager.set(AlarmManager.RTC_WAKEUP, calendar.getTimeInMillis(), pendingIntent);
                                                         }
                                                         Toast.makeText(getActivity(), "Lặp lịch hàng tháng thành công!", Toast.LENGTH_SHORT).show();
                                                         FragmentManager fragmentManager = getFragmentManager();
