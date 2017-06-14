@@ -251,15 +251,9 @@ public class ThemCongViecFragment extends Fragment {
                                             calendar.set(Calendar.SECOND, 00);
                                             Log.d("TEst Alarm", "Chay ngon cmnr");
                                             Log.d("TEst Alarm",
-                                                    "---------------------------------------------\n" +
-                                                            "---------------------------------------------\n" +
-                                                            "---------------------------------------------\n" +
-                                                            "---------------------------------------------" + calendar.getTime());
+                                                    "-" + calendar.getTime());
                                             Log.d("TEst Alarm",
-                                                    "---------------------------------------------\n" +
-                                                            "---------------------------------------------\n" +
-                                                            "---------------------------------------------\n" +
-                                                            "---------------------------------------------" + calendar.getTimeInMillis());
+                                                    "-" + calendar.getTimeInMillis());
                                             Intent myIntent = new Intent(getActivity(), AlarmNotificationReceiver.class);
                                             pendingIntent = PendingIntent.getBroadcast(getActivity(), 0, myIntent, 0);
 
